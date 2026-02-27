@@ -1,0 +1,54 @@
+name: Google Forms API
+description: The Google Forms API is a RESTful interface that lets you create, retrieve, and modify forms programmatically. It allows developers to automate form creation, access form responses, and integrate forms into their applications.
+url: https://developers.google.com/forms/api
+type: Index
+image: https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png
+created: 2024-01-15 00:00:00+00:00
+modified: 2024-01-15 00:00:00+00:00
+apis:
+- name: Google Forms API v1
+  description: Create and modify Google Forms, read form responses and structure, and integrate forms with external applications.
+  image: https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png
+  humanURL: https://developers.google.com/forms/api
+  baseURL: https://forms.googleapis.com/v1
+  tags:
+  - forms
+  - surveys
+  - questionnaires
+  - responses
+  - google
+  properties:
+  - type: Documentation
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: OpenAPI
+    url: https://forms.googleapis.com/$discovery/rest?version=v1
+  - type: Guides
+    url: https://developers.google.com/forms/api/guides
+  - type: Authentication
+    url: https://developers.google.com/forms/api/guides/auth
+  - type: Quickstart
+    url: https://developers.google.com/forms/api/quickstart/python
+  - type: Pricing
+    url: https://developers.google.com/forms/api/guides/quota
+  - type: TermsOfService
+    url: https://developers.google.com/terms
+  - type: Support
+    url: https://developers.google.com/forms/api/support
+  contact:
+  - type: Support
+    url: https://support.google.com/docs/answer/6281888
+common:
+- type: Console
+  url: https://console.cloud.google.com/apis/library/forms.googleapis.com
+- type: Authentication
+  url: https://developers.google.com/identity/protocols/oauth2
+- type: Status
+  url: https://status.cloud.google.com/
+- type: Privacy
+  url: https://policies.google.com/privacy
+- type: Terms
+  url: https://policies.google.com/terms
+maintainers:
+- name: Google
+  email: google-forms-api@google.com
+  url: https://developers.google.com/forms
