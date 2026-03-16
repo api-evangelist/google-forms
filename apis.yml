@@ -1,10 +1,12 @@
+aid: google-forms
 name: Google Forms API
 description: The Google Forms API is a RESTful interface that lets you create, retrieve, and modify forms programmatically. It allows developers to automate form creation, access form responses, and integrate forms into their applications.
 url: https://developers.google.com/forms/api
 type: Index
 image: https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png
-created: 2024-01-15 00:00:00+00:00
-modified: 2024-01-15 00:00:00+00:00
+created: '2024-01-15'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Google Forms API v1
   description: Create and modify Google Forms, read form responses and structure, and integrate forms with external applications.
@@ -49,6 +51,5 @@ common:
 - type: Terms
   url: https://policies.google.com/terms
 maintainers:
-- name: Google
-  email: google-forms-api@google.com
-  url: https://developers.google.com/forms
+- FN: Kin Lane
+  email: kin@apievangelist.com
