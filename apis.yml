@@ -1,5 +1,5 @@
 aid: google-forms
-name: Google Forms API
+name: Google Forms
 description: The Google Forms API is a RESTful interface that lets you create, retrieve, and modify forms programmatically. It allows developers to automate form creation, access form responses, and integrate forms into their applications.
 url: https://developers.google.com/forms/api
 type: Index
