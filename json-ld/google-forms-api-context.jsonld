@@ -1,0 +1,83 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "gforms": "https://developers.google.com/forms/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Form": "gforms:Form",
+    "FormResponse": "gforms:FormResponse",
+    "Watch": "gforms:Watch",
+    "Question": "gforms:Question",
+    "Item": "gforms:Item",
+    "formId": {
+      "@id": "gforms:formId",
+      "@type": "xsd:string"
+    },
+    "responseId": {
+      "@id": "gforms:responseId",
+      "@type": "xsd:string"
+    },
+    "questionId": {
+      "@id": "gforms:questionId",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "createTime": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "lastSubmittedTime": {
+      "@id": "gforms:lastSubmittedTime",
+      "@type": "xsd:dateTime"
+    },
+    "expireTime": {
+      "@id": "gforms:expireTime",
+      "@type": "xsd:dateTime"
+    },
+    "respondentEmail": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "revisionId": {
+      "@id": "gforms:revisionId",
+      "@type": "xsd:string"
+    },
+    "responderUri": {
+      "@id": "gforms:responderUri",
+      "@type": "@id"
+    },
+    "linkedSheetId": {
+      "@id": "gforms:linkedSheetId",
+      "@type": "xsd:string"
+    },
+    "totalScore": {
+      "@id": "gforms:totalScore",
+      "@type": "xsd:decimal"
+    },
+    "eventType": {
+      "@id": "gforms:eventType",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "gforms:state",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "gforms:items",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "answers": {
+      "@id": "gforms:answers",
+      "@type": "@id"
+    }
+  }
+}

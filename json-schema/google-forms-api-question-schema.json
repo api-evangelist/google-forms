@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-forms/refs/heads/main/json-schema/google-forms-api-question-schema.json",
+  "title": "Question",
+  "description": "A question in a Google Form.",
+  "type": "object",
+  "properties": {
+    "questionId": { "type": "string", "description": "Output only. The ID of the question.", "readOnly": true },
+    "required": { "type": "boolean", "description": "Whether the question must be answered." },
+    "grading": {
+      "type": "object",
+      "properties": {
+        "pointValue": { "type": "integer", "description": "Points available for this question." },
+        "correctAnswers": {
+          "type": "object",
+          "properties": {
+            "answers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "value": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "choiceQuestion": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["CHOICE_TYPE_UNSPECIFIED", "RADIO", "CHECKBOX", "DROP_DOWN"] },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "string" },
+              "isOther": { "type": "boolean" }
+            }
+          }
+        },
+        "shuffle": { "type": "boolean" }
+      }
+    },
+    "textQuestion": {
+      "type": "object",
+      "properties": {
+        "paragraph": { "type": "boolean", "description": "Whether the question accepts paragraph text." }
+      }
+    },
+    "scaleQuestion": {
+      "type": "object",
+      "properties": {
+        "low": { "type": "integer" },
+        "high": { "type": "integer" },
+        "lowLabel": { "type": "string" },
+        "highLabel": { "type": "string" }
+      }
+    },
+    "dateQuestion": {
+      "type": "object",
+      "properties": {
+        "includeTime": { "type": "boolean" },
+        "includeYear": { "type": "boolean" }
+      }
+    },
+    "timeQuestion": {
+      "type": "object",
+      "properties": {
+        "duration": { "type": "boolean" }
+      }
+    }
+  }
+}

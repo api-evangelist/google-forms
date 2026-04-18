@@ -1,0 +1,13 @@
+{
+  "id": "watch-abc123",
+  "target": {
+    "topic": {
+      "topicName": "projects/my-project/topics/forms-notifications"
+    }
+  },
+  "eventType": "RESPONSES",
+  "createTime": "2026-04-15T10:00:00Z",
+  "expireTime": "2026-04-22T10:00:00Z",
+  "errorType": "ERROR_TYPE_UNSPECIFIED",
+  "state": "ACTIVE"
+}

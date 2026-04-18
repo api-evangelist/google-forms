@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-forms/refs/heads/main/json-schema/google-forms-api-watch-schema.json",
+  "title": "Watch",
+  "description": "A watch for receiving notifications about form changes or responses.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Output only. The ID of this watch.", "readOnly": true },
+    "target": {
+      "type": "object",
+      "description": "The target for watch notifications.",
+      "properties": {
+        "topic": {
+          "type": "object",
+          "properties": {
+            "topicName": { "type": "string", "description": "A fully qualified Pub/Sub topic name." }
+          }
+        }
+      }
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Which event type to watch for.",
+      "enum": ["EVENT_TYPE_UNSPECIFIED", "SCHEMA", "RESPONSES"]
+    },
+    "createTime": { "type": "string", "format": "date-time", "description": "Timestamp of when this was created." },
+    "expireTime": { "type": "string", "format": "date-time", "description": "Timestamp for when this will expire." },
+    "errorType": {
+      "type": "string",
+      "enum": ["ERROR_TYPE_UNSPECIFIED", "PROJECT_NOT_AUTHORIZED", "NO_USER_ACCESS", "OTHER_ERRORS"]
+    },
+    "state": {
+      "type": "string",
+      "enum": ["STATE_UNSPECIFIED", "ACTIVE", "SUSPENDED"]
+    }
+  }
+}

@@ -1,0 +1,244 @@
+rules:
+  # INFO / METADATA
+  info-title-required:
+    description: Info object must have a title
+    given: $.info
+    severity: error
+    then:
+      field: title
+      function: truthy
+
+  info-title-prefix:
+    description: Info title should start with Google Forms
+    given: $.info.title
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Google Forms"
+
+  info-description-required:
+    description: Info object must have a description
+    given: $.info
+    severity: error
+    then:
+      field: description
+      function: truthy
+
+  info-version-required:
+    description: Info object must have a version
+    given: $.info
+    severity: error
+    then:
+      field: version
+      function: truthy
+
+  # OPENAPI VERSION
+  openapi-version:
+    description: OpenAPI version must be 3.0.x
+    given: $
+    severity: error
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\.0"
+
+  # SERVERS
+  servers-defined:
+    description: Servers array must be defined
+    given: $
+    severity: error
+    then:
+      field: servers
+      function: truthy
+
+  servers-https:
+    description: Server URLs must use HTTPS
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  # PATHS - NAMING CONVENTIONS
+  paths-kebab-case:
+    description: Path segments should use kebab-case
+    given: $.paths
+    severity: warn
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^(/v[0-9]+)?(/[a-z][a-z0-9-]*(/{[a-zA-Z]+})?)*(:?[a-zA-Z]+)?$"
+
+  paths-no-trailing-slash:
+    description: Paths must not have trailing slashes
+    given: $.paths
+    severity: error
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  # OPERATIONS
+  operation-summary-required:
+    description: Operations must have a summary
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: summary
+      function: truthy
+
+  operation-description-required:
+    description: Operations must have a description
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: description
+      function: truthy
+
+  operation-operationid-required:
+    description: Operations must have an operationId
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-camel-case:
+    description: operationId should be camelCase
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  operation-tags-required:
+    description: Operations must have at least one tag
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  operation-summary-title-case:
+    description: Operation summaries should start with Google Forms
+    given: $.paths[*][get,post,put,patch,delete].summary
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Google Forms "
+
+  # TAGS
+  tag-title-case:
+    description: Tag names should use Title Case
+    given: $.tags[*].name
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z]+"
+
+  # PARAMETERS
+  parameter-description-required:
+    description: Parameters must have descriptions
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  parameter-schema-required:
+    description: Parameters must have a schema
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    severity: error
+    then:
+      field: schema
+      function: truthy
+
+  # RESPONSES
+  response-success-required:
+    description: Operations must define a success response (2xx)
+    given: $.paths[*][get,post,put,patch,delete].responses
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["202"]
+            - required: ["204"]
+
+  response-401-required:
+    description: Operations should define a 401 response
+    given: $.paths[*][get,post,put,patch,delete].responses
+    severity: warn
+    then:
+      field: "401"
+      function: truthy
+
+  # SCHEMAS
+  schema-description-required:
+    description: Top-level schemas should have descriptions
+    given: $.components.schemas[*]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  schema-type-required:
+    description: Schemas should have a type defined
+    given: $.components.schemas[*]
+    severity: warn
+    then:
+      field: type
+      function: truthy
+
+  # SECURITY
+  security-global-defined:
+    description: Global security must be defined
+    given: $
+    severity: error
+    then:
+      field: security
+      function: truthy
+
+  security-schemes-defined:
+    description: Security schemes must be defined
+    given: $.components
+    severity: error
+    then:
+      field: securitySchemes
+      function: truthy
+
+  # HTTP METHOD CONVENTIONS
+  get-no-request-body:
+    description: GET operations must not have a request body
+    given: $.paths[*].get
+    severity: error
+    then:
+      field: requestBody
+      function: falsy
+
+  delete-no-request-body:
+    description: DELETE operations must not have a request body
+    given: $.paths[*].delete
+    severity: warn
+    then:
+      field: requestBody
+      function: falsy
+
+  # GENERAL QUALITY
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings
+    given: $.paths[*][get,post,put,patch,delete].description
+    severity: error
+    then:
+      function: truthy

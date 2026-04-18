@@ -1,0 +1,44 @@
+{
+  "questionId": "7e8f9a0b",
+  "required": true,
+  "grading": {
+    "pointValue": 10,
+    "correctAnswers": {
+      "answers": [
+        {
+          "value": "Paris"
+        }
+      ]
+    }
+  },
+  "choiceQuestion": {
+    "type": "RADIO",
+    "options": [
+      {
+        "value": "Very Satisfied",
+        "isOther": false
+      },
+      {
+        "value": "Satisfied",
+        "isOther": false
+      }
+    ],
+    "shuffle": false
+  },
+  "textQuestion": {
+    "paragraph": false
+  },
+  "scaleQuestion": {
+    "low": 1,
+    "high": 5,
+    "lowLabel": "Not Satisfied",
+    "highLabel": "Very Satisfied"
+  },
+  "dateQuestion": {
+    "includeTime": false,
+    "includeYear": true
+  },
+  "timeQuestion": {
+    "duration": false
+  }
+}

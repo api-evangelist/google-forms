@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-forms/refs/heads/main/json-structure/google-forms-api-form-structure.json",
+  "name": "Form",
+  "description": "A Google Form with items, settings, and metadata.",
+  "type": "object",
+  "properties": {
+    "formId": { "type": "string", "description": "Output only. The form ID." },
+    "info": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "documentTitle": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "quizSettings": { "type": "object", "properties": { "isQuiz": { "type": "boolean" } } },
+        "emailCollectionType": { "type": "string" }
+      }
+    },
+    "items": { "type": "array", "items": { "type": "object" } },
+    "revisionId": { "type": "string" },
+    "responderUri": { "type": "uri" },
+    "linkedSheetId": { "type": "string" },
+    "publishSettings": {
+      "type": "object",
+      "properties": {
+        "isPublished": { "type": "boolean" },
+        "isAcceptingResponses": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-forms/refs/heads/main/json-structure/google-forms-api-form-response-structure.json",
+  "name": "FormResponse",
+  "description": "A response to a Google Form.",
+  "type": "object",
+  "properties": {
+    "formId": { "type": "string" },
+    "responseId": { "type": "string" },
+    "createTime": { "type": "datetime" },
+    "lastSubmittedTime": { "type": "datetime" },
+    "respondentEmail": { "type": "string" },
+    "answers": { "type": "object" },
+    "totalScore": { "type": "double" }
+  }
+}

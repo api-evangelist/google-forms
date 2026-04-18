@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-forms/refs/heads/main/json-structure/google-forms-api-question-structure.json",
+  "name": "Question",
+  "description": "A question in a Google Form.",
+  "type": "object",
+  "properties": {
+    "questionId": { "type": "string" },
+    "required": { "type": "boolean" },
+    "grading": { "type": "object" },
+    "choiceQuestion": { "type": "object" },
+    "textQuestion": { "type": "object" },
+    "scaleQuestion": { "type": "object" },
+    "dateQuestion": { "type": "object" },
+    "timeQuestion": { "type": "object" }
+  }
+}

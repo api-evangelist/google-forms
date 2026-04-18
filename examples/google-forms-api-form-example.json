@@ -1,0 +1,28 @@
+{
+  "formId": "1BxiMVs0XRA5nFMdLXDSR2r9NphkU4V9qeeW0nQmGR8",
+  "info": {
+    "title": "Customer Feedback Survey",
+    "documentTitle": "Customer Feedback Survey",
+    "description": "Please share your feedback about our services."
+  },
+  "settings": {
+    "quizSettings": {
+      "isQuiz": false
+    },
+    "emailCollectionType": "VERIFIED"
+  },
+  "items": [
+    {
+      "itemId": "4a5b6c7d",
+      "title": "How satisfied are you with our service?",
+      "description": "Please rate on a scale of 1-5"
+    }
+  ],
+  "revisionId": "00000042",
+  "responderUri": "https://docs.google.com/forms/d/e/1FAIpQLSd/viewform",
+  "linkedSheetId": "1a2b3c4d5e",
+  "publishSettings": {
+    "isPublished": true,
+    "isAcceptingResponses": true
+  }
+}

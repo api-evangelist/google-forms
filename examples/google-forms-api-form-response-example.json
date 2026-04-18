@@ -1,0 +1,20 @@
+{
+  "formId": "1BxiMVs0XRA5nFMdLXDSR2r9NphkU4V9qeeW0nQmGR8",
+  "responseId": "ACYDBNhq7TU3h6Vk",
+  "createTime": "2026-04-15T10:30:00Z",
+  "lastSubmittedTime": "2026-04-15T10:30:00Z",
+  "respondentEmail": "respondent@example.com",
+  "answers": {
+    "7e8f9a0b": {
+      "questionId": "7e8f9a0b",
+      "textAnswers": {
+        "answers": [
+          {
+            "value": "Very Satisfied"
+          }
+        ]
+      }
+    }
+  },
+  "totalScore": 85.0
+}

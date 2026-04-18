@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/google-forms/refs/heads/main/json-schema/google-forms-api-form-schema.json",
+  "title": "Form",
+  "description": "A Google Form with items, settings, and metadata.",
+  "type": "object",
+  "properties": {
+    "formId": {
+      "type": "string",
+      "description": "Output only. The form ID.",
+      "readOnly": true
+    },
+    "info": {
+      "type": "object",
+      "description": "General information about the form.",
+      "properties": {
+        "title": { "type": "string", "description": "Required. The title of the form visible to responders." },
+        "documentTitle": { "type": "string", "description": "Output only. The title of the document visible in Google Drive.", "readOnly": true },
+        "description": { "type": "string", "description": "The description of the form." }
+      },
+      "required": ["title"]
+    },
+    "settings": {
+      "type": "object",
+      "description": "Form-level settings including quiz configuration.",
+      "properties": {
+        "quizSettings": {
+          "type": "object",
+          "properties": {
+            "isQuiz": { "type": "boolean", "description": "Whether this form is a quiz." }
+          }
+        },
+        "emailCollectionType": {
+          "type": "string",
+          "enum": ["EMAIL_COLLECTION_TYPE_UNSPECIFIED", "DO_NOT_COLLECT", "VERIFIED", "RESPONDER_INPUT"]
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of the form's items including section headers, questions, and media.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "revisionId": {
+      "type": "string",
+      "description": "Output only. The revision ID of the form.",
+      "readOnly": true
+    },
+    "responderUri": {
+      "type": "string",
+      "description": "Output only. The form URI to share with responders.",
+      "readOnly": true
+    },
+    "linkedSheetId": {
+      "type": "string",
+      "description": "Output only. The ID of the linked Google Sheet.",
+      "readOnly": true
+    },
+    "publishSettings": {
+      "type": "object",
+      "properties": {
+        "isPublished": { "type": "boolean" },
+        "isAcceptingResponses": { "type": "boolean" }
+      }
+    }
+  }
+}

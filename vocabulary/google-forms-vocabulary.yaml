@@ -1,0 +1,167 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Google Forms"
+  description: "Vocabulary covering the Google Forms API operational and capability dimensions."
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+operational:
+  apis:
+    - name: Google Forms API v1
+      namespace: forms-api
+      version: v1
+      baseUrl: https://forms.googleapis.com
+      status: active
+
+  resources:
+    - name: forms
+      apis: [forms-api]
+      actions: [create, get, batchUpdate, setPublishSettings]
+    - name: responses
+      apis: [forms-api]
+      actions: [list, get]
+    - name: watches
+      apis: [forms-api]
+      actions: [create, list, delete, renew]
+
+  actions:
+    - name: create
+      methods: [POST]
+      pattern: write
+    - name: get
+      methods: [GET]
+      pattern: read
+    - name: list
+      methods: [GET]
+      pattern: read
+    - name: batchUpdate
+      methods: [POST]
+      pattern: write
+    - name: setPublishSettings
+      methods: [POST]
+      pattern: write
+    - name: delete
+      methods: [DELETE]
+      pattern: destructive
+    - name: renew
+      methods: [POST]
+      pattern: write
+
+  schemas:
+    core:
+      - name: Form
+        description: A Google Form with items, settings, and metadata
+        keyProperties: [formId, info, items, settings]
+      - name: FormResponse
+        description: A response to a Google Form
+        keyProperties: [responseId, formId, answers, totalScore]
+      - name: Watch
+        description: A notification watch for form events
+        keyProperties: [id, eventType, state, expireTime]
+      - name: Question
+        description: A question in a form
+        keyProperties: [questionId, required, choiceQuestion, textQuestion]
+    items:
+      - name: Item
+        description: A form item (question, text, image, video, page break)
+        keyProperties: [itemId, title, questionItem]
+      - name: QuestionItem
+        description: An item containing a single question
+        keyProperties: [question, image]
+
+  parameters:
+    pagination:
+      - name: pageSize
+        type: integer
+      - name: pageToken
+        type: string
+    identifiers:
+      - name: formId
+        type: string
+      - name: responseId
+        type: string
+      - name: watchId
+        type: string
+
+  enums:
+    eventTypes:
+      - EVENT_TYPE_UNSPECIFIED
+      - SCHEMA
+      - RESPONSES
+    watchStates:
+      - STATE_UNSPECIFIED
+      - ACTIVE
+      - SUSPENDED
+    choiceTypes:
+      - RADIO
+      - CHECKBOX
+      - DROP_DOWN
+    emailCollectionTypes:
+      - DO_NOT_COLLECT
+      - VERIFIED
+      - RESPONDER_INPUT
+
+  authentication:
+    schemes:
+      - type: oauth2
+        flows: [authorizationCode]
+        scopes:
+          - https://www.googleapis.com/auth/forms.body
+          - https://www.googleapis.com/auth/forms.body.readonly
+          - https://www.googleapis.com/auth/forms.responses.readonly
+
+capability:
+  workflows:
+    - name: Form Management
+      file: capabilities/form-management.yaml
+      description: "Create forms, collect responses, monitor changes"
+      apisUsed: [forms-api]
+      toolCount: 10
+      personas: [Form Administrator, Data Analyst]
+      domains: [Data Collection, Survey Management]
+
+  personas:
+    - id: form-admin
+      name: Form Administrator
+      description: Creates and manages forms, monitors responses
+      workflows: [Form Management]
+    - id: data-analyst
+      name: Data Analyst
+      description: Analyzes form responses and collects data
+      workflows: [Form Management]
+
+  domains:
+    - name: Data Collection
+      description: Creating and managing forms for data collection
+      resources: [forms, responses]
+    - name: Survey Management
+      description: Managing surveys, questions, and notification watches
+      resources: [forms, watches]
+
+  namespaces:
+    consumed:
+      - forms-api
+    restExposed:
+      - namespace: form-management-api
+        port: 8080
+    mcpExposed:
+      - namespace: form-management-mcp
+        port: 9090
+
+  binds:
+    - GOOGLE_FORMS_API_KEY
+
+crossReference:
+  - resource: forms
+    operations: [createForm, getForm, batchUpdateForm, setPublishSettings]
+    workflows: [Form Management]
+    personas: [Form Administrator]
+  - resource: responses
+    operations: [listFormResponses, getFormResponse]
+    workflows: [Form Management]
+    personas: [Data Analyst, Form Administrator]
+  - resource: watches
+    operations: [createWatch, listWatches, deleteWatch, renewWatch]
+    workflows: [Form Management]
+    personas: [Form Administrator]
