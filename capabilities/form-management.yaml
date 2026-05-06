@@ -1,159 +1,349 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Google Forms Form Management"
-  description: "Workflow capability for managing Google Forms - creating forms, collecting responses, and monitoring changes via watches. Used by form administrators and data analysts."
+  label: Google Forms Form Management
+  description: Workflow capability for managing Google Forms - creating forms, collecting responses, and monitoring changes
+    via watches. Used by form administrators and data analysts.
   tags:
-    - Google Forms
-    - Surveys
-    - Data Collection
-    - Notifications
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - Google Forms
+  - Surveys
+  - Data Collection
+  - Notifications
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      GOOGLE_FORMS_API_KEY: GOOGLE_FORMS_API_KEY
-
+- namespace: env
+  keys:
+    GOOGLE_FORMS_API_KEY: GOOGLE_FORMS_API_KEY
 capability:
   consumes:
-    - import: forms-api
-      location: ./shared/forms-api.yaml
-
+  - type: http
+    namespace: forms-api
+    baseUri: https://forms.googleapis.com
+    description: Google Forms API v1 for managing forms, responses, and watches.
+    authentication:
+      type: bearer
+      token: '{{GOOGLE_FORMS_API_KEY}}'
+    resources:
+    - name: forms
+      path: /v1/forms
+      description: Form management operations
+      operations:
+      - name: create-form
+        method: POST
+        description: Create a new form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            info:
+              title: '{{tools.title}}'
+      - name: get-form
+        method: GET
+        description: Get a form by ID
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: batch-update-form
+        method: POST
+        description: Batch update a form with multiple changes
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            requests: '{{tools.requests}}'
+      - name: set-publish-settings
+        method: POST
+        description: Update publish settings for a form
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            publishSettings: '{{tools.publishSettings}}'
+    - name: responses
+      path: /v1/forms/{formId}/responses
+      description: Form response operations
+      operations:
+      - name: list-responses
+        method: GET
+        description: List form responses
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        - name: pageSize
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of responses
+        - name: pageToken
+          in: query
+          type: string
+          required: false
+          description: Pagination token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-response
+        method: GET
+        description: Get a single form response
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        - name: responseId
+          in: path
+          type: string
+          required: true
+          description: The response ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: watches
+      path: /v1/forms/{formId}/watches
+      description: Watch management operations
+      operations:
+      - name: create-watch
+        method: POST
+        description: Create a new watch for notifications
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            watch: '{{tools.watch}}'
+      - name: list-watches
+        method: GET
+        description: List watches for a form
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-watch
+        method: DELETE
+        description: Delete a watch
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        - name: watchId
+          in: path
+          type: string
+          required: true
+          description: The watch ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: renew-watch
+        method: POST
+        description: Renew a watch for seven more days
+        inputParameters:
+        - name: formId
+          in: path
+          type: string
+          required: true
+          description: The ID of the form
+        - name: watchId
+          in: path
+          type: string
+          required: true
+          description: The watch ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: form-management-api
-      description: "Unified REST API for Google Forms management workflows."
-      resources:
-        - path: /v1/forms
-          name: forms
-          description: "Form CRUD operations"
-          operations:
-            - method: POST
-              name: create-form
-              description: "Create a new form"
-              call: "forms-api.create-form"
-            - method: GET
-              name: get-form
-              description: "Get form details"
-              call: "forms-api.get-form"
-        - path: /v1/responses
-          name: responses
-          description: "Form response operations"
-          operations:
-            - method: GET
-              name: list-responses
-              description: "List form responses"
-              call: "forms-api.list-responses"
-            - method: GET
-              name: get-response
-              description: "Get a single response"
-              call: "forms-api.get-response"
-        - path: /v1/watches
-          name: watches
-          description: "Watch notification operations"
-          operations:
-            - method: POST
-              name: create-watch
-              description: "Create a notification watch"
-              call: "forms-api.create-watch"
-            - method: GET
-              name: list-watches
-              description: "List watches"
-              call: "forms-api.list-watches"
-            - method: DELETE
-              name: delete-watch
-              description: "Delete a watch"
-              call: "forms-api.delete-watch"
-
-    - type: mcp
-      port: 9090
-      namespace: form-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted Google Forms management."
-      tools:
-        - name: create-form
-          description: "Create a new Google Form with a title"
-          hints:
-            readOnly: false
-            openWorld: true
-          call: "forms-api.create-form"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-form
-          description: "Get a Google Form's structure and settings"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "forms-api.get-form"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: batch-update-form
-          description: "Apply batch updates to a form (add/remove/modify items)"
-          hints:
-            readOnly: false
-          call: "forms-api.batch-update-form"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: set-publish-settings
-          description: "Update form publish settings"
-          hints:
-            readOnly: false
-          call: "forms-api.set-publish-settings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-responses
-          description: "List all responses for a form"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "forms-api.list-responses"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-response
-          description: "Get a single form response by ID"
-          hints:
-            readOnly: true
-          call: "forms-api.get-response"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-watch
-          description: "Set up a Pub/Sub watch for form changes or new responses"
-          hints:
-            readOnly: false
-          call: "forms-api.create-watch"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-watches
-          description: "List all active watches for a form"
-          hints:
-            readOnly: true
-          call: "forms-api.list-watches"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-watch
-          description: "Delete a watch to stop notifications"
-          hints:
-            destructive: true
-          call: "forms-api.delete-watch"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: renew-watch
-          description: "Extend a watch's expiration by seven days"
-          hints:
-            readOnly: false
-          call: "forms-api.renew-watch"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: form-management-api
+    description: Unified REST API for Google Forms management workflows.
+    resources:
+    - path: /v1/forms
+      name: forms
+      description: Form CRUD operations
+      operations:
+      - method: POST
+        name: create-form
+        description: Create a new form
+        call: forms-api.create-form
+      - method: GET
+        name: get-form
+        description: Get form details
+        call: forms-api.get-form
+    - path: /v1/responses
+      name: responses
+      description: Form response operations
+      operations:
+      - method: GET
+        name: list-responses
+        description: List form responses
+        call: forms-api.list-responses
+      - method: GET
+        name: get-response
+        description: Get a single response
+        call: forms-api.get-response
+    - path: /v1/watches
+      name: watches
+      description: Watch notification operations
+      operations:
+      - method: POST
+        name: create-watch
+        description: Create a notification watch
+        call: forms-api.create-watch
+      - method: GET
+        name: list-watches
+        description: List watches
+        call: forms-api.list-watches
+      - method: DELETE
+        name: delete-watch
+        description: Delete a watch
+        call: forms-api.delete-watch
+  - type: mcp
+    port: 9090
+    namespace: form-management-mcp
+    transport: http
+    description: MCP server for AI-assisted Google Forms management.
+    tools:
+    - name: create-form
+      description: Create a new Google Form with a title
+      hints:
+        readOnly: false
+        openWorld: true
+      call: forms-api.create-form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-form
+      description: Get a Google Form's structure and settings
+      hints:
+        readOnly: true
+        openWorld: true
+      call: forms-api.get-form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batch-update-form
+      description: Apply batch updates to a form (add/remove/modify items)
+      hints:
+        readOnly: false
+      call: forms-api.batch-update-form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-publish-settings
+      description: Update form publish settings
+      hints:
+        readOnly: false
+      call: forms-api.set-publish-settings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-responses
+      description: List all responses for a form
+      hints:
+        readOnly: true
+        openWorld: true
+      call: forms-api.list-responses
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-response
+      description: Get a single form response by ID
+      hints:
+        readOnly: true
+      call: forms-api.get-response
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-watch
+      description: Set up a Pub/Sub watch for form changes or new responses
+      hints:
+        readOnly: false
+      call: forms-api.create-watch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-watches
+      description: List all active watches for a form
+      hints:
+        readOnly: true
+      call: forms-api.list-watches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-watch
+      description: Delete a watch to stop notifications
+      hints:
+        destructive: true
+      call: forms-api.delete-watch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renew-watch
+      description: Extend a watch's expiration by seven days
+      hints:
+        readOnly: false
+      call: forms-api.renew-watch
+      outputParameters:
+      - type: object
+        mapping: $.
