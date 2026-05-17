@@ -90,7 +90,7 @@ common:
     url: https://developers.google.com/forms/api/guides/quota
   - type: Support
     url: https://developers.google.com/forms/api/support
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/google-forms-api-context.jsonld
   - type: SpectralRules
     url: rules/google-forms-spectral-rules.yml
