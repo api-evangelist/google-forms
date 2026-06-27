@@ -51,25 +51,25 @@ apis:
       url: json-structure/google-forms-api-watch-structure.json
     - type: JSONStructure
       url: json-structure/google-forms-api-question-structure.json
-    - type: Example
+    - type: Examples
       url: examples/google-forms-api-form-example.json
-    - type: Example
+    - type: Examples
       url: examples/google-forms-api-form-response-example.json
-    - type: Example
+    - type: Examples
       url: examples/google-forms-api-watch-example.json
-    - type: Example
+    - type: Examples
       url: examples/google-forms-api-question-example.json
     - type: APIReference
       url: https://developers.google.com/forms/api/reference/rest
-    - type: Quickstart
+    - type: GettingStarted
       url: https://developers.google.com/forms/api/quickstart/python
     - type: Authentication
       url: https://developers.google.com/forms/api/guides/auth
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/google-forms-forms.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/google-forms-responses.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/google-forms-watches.yaml
     contact:
     - type: Support
