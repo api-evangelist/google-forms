@@ -75,6 +75,12 @@ apis:
     - type: Support
       url: https://support.google.com/docs/answer/6281888
 common:
+  - type: VulnerabilityDisclosure
+    url: security/google-forms-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/google-forms-domain-security.yml
+  - type: Authentication
+    url: authentication/google-forms-authentication.yml
   - type: OAuthScopes
     url: scopes/google-forms-scopes.yml
   - type: GitHubOrganization
