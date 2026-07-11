@@ -1,0 +1,48 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/google-forms-api.yaml
+schemes:
+- name: oauth2
+  source: openapi/google-forms-api.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+  description: OAuth 2.0 authentication for Google Forms API.
+scopes:
+- scope: https://www.googleapis.com/auth/drive
+  description: See, edit, create, and delete all of your Google Drive files
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-forms-api.yaml
+- scope: https://www.googleapis.com/auth/drive.file
+  description: View and manage Google Drive files created with this app
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-forms-api.yaml
+- scope: https://www.googleapis.com/auth/drive.readonly
+  description: View files in your Google Drive
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-forms-api.yaml
+- scope: https://www.googleapis.com/auth/forms.body
+  description: View and manage your forms in Google Drive
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-forms-api.yaml
+- scope: https://www.googleapis.com/auth/forms.body.readonly
+  description: View your forms in Google Drive
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-forms-api.yaml
+- scope: https://www.googleapis.com/auth/forms.responses.readonly
+  description: View responses to your Google Forms
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-forms-api.yaml

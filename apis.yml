@@ -75,6 +75,8 @@ apis:
     - type: Support
       url: https://support.google.com/docs/answer/6281888
 common:
+  - type: OAuthScopes
+    url: scopes/google-forms-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/googleworkspace
   - type: Console
