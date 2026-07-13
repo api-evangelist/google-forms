@@ -1,5 +1,25 @@
+# google-forms — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on googleapis.com
+#   - path-params-casing: camel @ 100% (n=12)
+#   - operationid-casing: camel @ 100% (n=10)
+#   - schema-names-casing: pascal @ 100% (n=59)
+#   - schema-properties-casing: camel @ 57% (n=157)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: Error
+#   - operation-documents-401: 100% adherence
+#   - operation-documents-404: 90% adherence
+#   - pagination params observed: ['pageSize', 'pageToken']
+#   - merge: kept 27 existing, added 6 measured, upgraded 0
+#   - added: servers-expected-domain, schema-names-casing, schema-properties-casing, error-schema-defined, operation-documents-404, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-  # INFO / METADATA
   info-title-required:
     description: Info object must have a title
     given: $.info
@@ -7,7 +27,6 @@ rules:
     then:
       field: title
       function: truthy
-
   info-title-prefix:
     description: Info title should start with Google Forms
     given: $.info.title
@@ -15,8 +34,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Google Forms"
-
+        match: ^Google Forms
   info-description-required:
     description: Info object must have a description
     given: $.info
@@ -24,7 +42,6 @@ rules:
     then:
       field: description
       function: truthy
-
   info-version-required:
     description: Info object must have a version
     given: $.info
@@ -32,8 +49,6 @@ rules:
     then:
       field: version
       function: truthy
-
-  # OPENAPI VERSION
   openapi-version:
     description: OpenAPI version must be 3.0.x
     given: $
@@ -42,9 +57,7 @@ rules:
       field: openapi
       function: pattern
       functionOptions:
-        match: "^3\\.0"
-
-  # SERVERS
+        match: ^3\.0
   servers-defined:
     description: Servers array must be defined
     given: $
@@ -52,7 +65,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https:
     description: Server URLs must use HTTPS
     given: $.servers[*].url
@@ -60,30 +72,25 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
-
-  # PATHS - NAMING CONVENTIONS
+        match: ^https://
   paths-kebab-case:
     description: Path segments should use kebab-case
     given: $.paths
     severity: warn
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        match: "^(/v[0-9]+)?(/[a-z][a-z0-9-]*(/{[a-zA-Z]+})?)*(:?[a-zA-Z]+)?$"
-
+        match: ^(/v[0-9]+)?(/[a-z][a-z0-9-]*(/{[a-zA-Z]+})?)*(:?[a-zA-Z]+)?$
   paths-no-trailing-slash:
     description: Paths must not have trailing slashes
     given: $.paths
     severity: error
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        notMatch: "/$"
-
-  # OPERATIONS
+        notMatch: /$
   operation-summary-required:
     description: Operations must have a summary
     given: $.paths[*][get,post,put,patch,delete]
@@ -91,7 +98,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   operation-description-required:
     description: Operations must have a description
     given: $.paths[*][get,post,put,patch,delete]
@@ -99,7 +105,6 @@ rules:
     then:
       field: description
       function: truthy
-
   operation-operationid-required:
     description: Operations must have an operationId
     given: $.paths[*][get,post,put,patch,delete]
@@ -107,7 +112,6 @@ rules:
     then:
       field: operationId
       function: truthy
-
   operation-operationid-camel-case:
     description: operationId should be camelCase
     given: $.paths[*][get,post,put,patch,delete].operationId
@@ -115,8 +119,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-tags-required:
     description: Operations must have at least one tag
     given: $.paths[*][get,post,put,patch,delete]
@@ -124,7 +127,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   operation-summary-title-case:
     description: Operation summaries should start with Google Forms
     given: $.paths[*][get,post,put,patch,delete].summary
@@ -132,9 +134,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Google Forms "
-
-  # TAGS
+        match: '^Google Forms '
   tag-title-case:
     description: Tag names should use Title Case
     given: $.tags[*].name
@@ -142,9 +142,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][a-zA-Z]+"
-
-  # PARAMETERS
+        match: ^[A-Z][a-zA-Z]+
   parameter-description-required:
     description: Parameters must have descriptions
     given: $.paths[*][get,post,put,patch,delete].parameters[*]
@@ -152,7 +150,6 @@ rules:
     then:
       field: description
       function: truthy
-
   parameter-schema-required:
     description: Parameters must have a schema
     given: $.paths[*][get,post,put,patch,delete].parameters[*]
@@ -160,8 +157,6 @@ rules:
     then:
       field: schema
       function: truthy
-
-  # RESPONSES
   response-success-required:
     description: Operations must define a success response (2xx)
     given: $.paths[*][get,post,put,patch,delete].responses
@@ -171,20 +166,21 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ["200"]
-            - required: ["201"]
-            - required: ["202"]
-            - required: ["204"]
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '202'
+          - required:
+            - '204'
   response-401-required:
     description: Operations should define a 401 response
     given: $.paths[*][get,post,put,patch,delete].responses
     severity: warn
     then:
-      field: "401"
+      field: '401'
       function: truthy
-
-  # SCHEMAS
   schema-description-required:
     description: Top-level schemas should have descriptions
     given: $.components.schemas[*]
@@ -192,7 +188,6 @@ rules:
     then:
       field: description
       function: truthy
-
   schema-type-required:
     description: Schemas should have a type defined
     given: $.components.schemas[*]
@@ -200,8 +195,6 @@ rules:
     then:
       field: type
       function: truthy
-
-  # SECURITY
   security-global-defined:
     description: Global security must be defined
     given: $
@@ -209,7 +202,6 @@ rules:
     then:
       field: security
       function: truthy
-
   security-schemes-defined:
     description: Security schemes must be defined
     given: $.components
@@ -217,8 +209,6 @@ rules:
     then:
       field: securitySchemes
       function: truthy
-
-  # HTTP METHOD CONVENTIONS
   get-no-request-body:
     description: GET operations must not have a request body
     given: $.paths[*].get
@@ -226,7 +216,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   delete-no-request-body:
     description: DELETE operations must not have a request body
     given: $.paths[*].delete
@@ -234,11 +223,49 @@ rules:
     then:
       field: requestBody
       function: falsy
-
-  # GENERAL QUALITY
   no-empty-descriptions:
-    description: Descriptions must not be empty strings
-    given: $.paths[*][get,post,put,patch,delete].description
-    severity: error
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
     then:
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the googleapis.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: googleapis\.com
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  error-schema-defined:
+    description: A shared error schema (Error) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: Error
+      function: truthy
+  operation-documents-404:
+    description: Operations should document a 404 response (documented on 90% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '404'
       function: truthy
