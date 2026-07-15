@@ -75,6 +75,8 @@ apis:
     - type: Support
       url: https://support.google.com/docs/answer/6281888
 common:
+  - type: AgenticAccess
+    url: agentic-access/google-forms-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/google-forms-vulnerability-disclosure.yml
   - type: DomainSecurity
