@@ -6,7 +6,7 @@ url: https://developers.google.com/forms/api
 type: Index
 image: https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 tags:
   - Data Collection
@@ -65,18 +65,34 @@ apis:
       url: https://developers.google.com/forms/api/quickstart/python
     - type: Authentication
       url: https://developers.google.com/forms/api/guides/auth
-    - type: X-NaftikoCapability
-      url: capabilities/google-forms-forms.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/google-forms-responses.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/google-forms-watches.yaml
+    - type: Overlay
+      url: overlays/google-forms-api-overlay.yaml
     contact:
     - type: Support
       url: https://support.google.com/docs/answer/6281888
 common:
   - type: AgenticAccess
     url: agentic-access/google-forms-agentic-access.yml
+  - type: Packages
+    url: packages/google-forms-packages.yml
+  - type: WellKnown
+    url: well-known/google-forms-well-known.yml
+  - type: MCPServer
+    url: mcp/google-forms-mcp.yml
+  - type: LLMsTxt
+    url: llms/google-forms-llms.txt
+  - type: Conformance
+    url: conformance/google-forms-conformance.yml
+  - type: ErrorCatalog
+    url: errors/google-forms-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/google-forms-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/google-forms-changelog.yml
+  - type: Conventions
+    url: conventions/google-forms-conventions.yml
+  - type: DataModel
+    url: data-model/google-forms-data-model.yml
   - type: VulnerabilityDisclosure
     url: security/google-forms-vulnerability-disclosure.yml
   - type: DomainSecurity

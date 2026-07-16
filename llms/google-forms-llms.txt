@@ -1,0 +1,39 @@
+# Google Forms API
+
+> The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, set up watches for Cloud Pub/Sub notifications on form changes and new responses, and integrate forms with external applications. Authentication is OAuth 2.0 (authorization code) against Google's accounts.google.com authorization server; the API base is https://forms.googleapis.com/v1.
+
+## APIs
+
+- [Google Forms API v1](https://developers.google.com/forms/api): Create/read/update forms, read responses, and manage watches. Base URL https://forms.googleapis.com/v1.
+
+## Specs
+
+- [OpenAPI 3.0.3](openapi/google-forms-api.yaml): 10 operations across Forms, Responses, and Watches.
+- [Form JSON Schema](json-schema/google-forms-api-form-schema.json)
+- [Form Response JSON Schema](json-schema/google-forms-api-form-response-schema.json)
+- [Watch JSON Schema](json-schema/google-forms-api-watch-schema.json)
+- [Question JSON Schema](json-schema/google-forms-api-question-schema.json)
+
+## Auth
+
+- [OAuth 2.0 scopes](scopes/google-forms-scopes.yml): forms.body, forms.body.readonly, forms.responses.readonly, plus drive / drive.file / drive.readonly.
+- [Authentication profile](authentication/google-forms-authentication.yml)
+- [Auth guide](https://developers.google.com/workspace/forms/api/guides/authorize)
+
+## Docs
+
+- [REST Reference](https://developers.google.com/forms/api/reference/rest)
+- [Python quickstart](https://developers.google.com/workspace/forms/api/quickstart/python)
+- [Client libraries](https://developers.google.com/workspace/forms/api/guides/libraries)
+- [Quotas & limits](https://developers.google.com/forms/api/guides/quota)
+- [Release notes](https://developers.google.com/workspace/forms/release-notes)
+
+## Operations
+
+- Forms: createForm, getForm, batchUpdateForm, setPublishSettings
+- Responses: listFormResponses, getFormResponse
+- Watches: createWatch, listWatches, deleteWatch, renewWatch
+
+## Notes
+
+- As of June 30, 2026, forms created via the API default to an UNPUBLISHED state and must be published explicitly with setPublishSettings before they accept responses.

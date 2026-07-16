@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/google-forms-api.yaml
+standards:
+- id: oauth2
+  conforms: true
+  evidence: openapi securitySchemes declares type oauth2 (authorizationCode flow)
+- id: oidc
+  conforms: true
+  evidence: authorization host accounts.google.com publishes /.well-known/openid-configuration
+- id: rfc8414-oauth-metadata
+  conforms: true
+  evidence: accounts.google.com publishes /.well-known/oauth-authorization-server (200)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use Google's google.rpc.Status envelope (error.code/message/status), not application/problem+json
+- id: pagination
+  conforms: true
+  evidence: listFormResponses uses pageSize + pageToken with nextPageToken response field
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header; batchUpdate uses WriteControl revisionId for optimistic concurrency instead
+- id: json-api
+  conforms: false
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: odata
+  conforms: false

@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.google.com/workspace/forms/release-notes
+scheme: dated-release-notes
+current_version: v1
+feed: https://developers.google.com/feeds/forms-release-notes.xml
+notes: >-
+  The Forms API release-notes page is sparse; captured here is the recent
+  dated window plus the scheduled 2026-06-30 behavioral change documented on
+  the API-changes guide.
+entries:
+- date: '2026-06-30'
+  breaking: true
+  highlights:
+  - Forms created via the API after this date default to an unpublished state.
+  - Callers must invoke setPublishSettings to publish and start accepting responses.
+  docs: https://developers.google.com/workspace/forms/api/guides/api-changes-to-google-forms
+- date: '2025-04-08'
+  breaking: false
+  additions: true
+  highlights:
+  - Publishing forms is now available via the Forms API.
+  - Granular responder controls via Drive API permissions methods.
+  docs: https://developers.google.com/workspace/forms/release-notes
+- date: '2022-03-17'
+  breaking: false
+  additions: true
+  highlights:
+  - The Google Forms API is now generally available.
+  docs: https://developers.google.com/workspace/forms/release-notes

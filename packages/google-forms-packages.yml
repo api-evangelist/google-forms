@@ -1,0 +1,64 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.google.com/workspace/forms/api/guides/libraries
+description: >-
+  Google does not ship a dedicated Forms-only SDK; the Forms API is reached
+  through Google's officially supported multi-API client libraries (generated
+  from the Discovery document) plus, in Node.js and .NET, a per-API package.
+packages:
+- language: javascript
+  registry: npm
+  name: "@googleapis/forms"
+  url: https://www.npmjs.com/package/@googleapis/forms
+  install: npm install @googleapis/forms
+  official: true
+  note: Per-API Node.js package generated from the Forms v1 Discovery document.
+- language: javascript
+  registry: npm
+  name: googleapis
+  url: https://www.npmjs.com/package/googleapis
+  install: npm install googleapis
+  official: true
+  note: Umbrella Node.js client; exposes google.forms('v1').
+- language: python
+  registry: pypi
+  name: google-api-python-client
+  url: https://pypi.org/project/google-api-python-client/
+  install: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+  official: true
+  note: Discovery-based Python client; build('forms','v1').
+- language: dotnet
+  registry: nuget
+  name: Google.Apis.Forms.v1
+  url: https://www.nuget.org/packages/Google.Apis.Forms.v1/
+  install: dotnet add package Google.Apis.Forms.v1
+  official: true
+  note: Per-API .NET client generated for Forms v1.
+- language: java
+  registry: maven
+  name: com.google.apis:google-api-services-forms
+  url: https://central.sonatype.com/artifact/com.google.apis/google-api-services-forms
+  install: 'implementation "com.google.apis:google-api-services-forms:v1-rev+"'
+  official: true
+  note: Generated Java client for the Forms v1 API.
+- language: php
+  registry: packagist
+  name: google/apiclient
+  url: https://packagist.org/packages/google/apiclient
+  install: composer require google/apiclient
+  official: true
+  note: Umbrella PHP client; includes Google\Service\Forms.
+- language: go
+  registry: pkg.go.dev
+  name: google.golang.org/api/forms/v1
+  url: https://pkg.go.dev/google.golang.org/api/forms/v1
+  install: go get google.golang.org/api/forms/v1
+  official: true
+  note: Generated Go client package for Forms v1.
+- language: ruby
+  registry: rubygems
+  name: google-apis-forms_v1
+  url: https://rubygems.org/gems/google-apis-forms_v1
+  install: gem install google-apis-forms_v1
+  official: true
+  note: Generated Ruby client for Forms v1.

@@ -1,0 +1,26 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.google.com/workspace/forms/release-notes
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://developers.google.com/forms/api/reference/rest
+  note: Single stable version (v1); Forms API reached general availability 2022-03-17.
+deprecation:
+  policy_url: https://cloud.google.com/apis/design/deprecation
+  sunset_header: false
+  note: >-
+    Google follows its platform deprecation policy for Cloud/Workspace APIs.
+    No Forms operations are marked deprecated in the OpenAPI. A behavioral
+    breaking change is scheduled: after 2026-06-30 forms created via the API
+    default to unpublished and must call setPublishSettings to accept responses.
+  breaking_changes:
+  - date: '2026-06-30'
+    summary: API-created forms default to an unpublished state; must be explicitly published.
+    docs: https://developers.google.com/workspace/forms/api/guides/api-changes-to-google-forms
+sla:
+  url: https://cloud.google.com/terms/sla/
+  note: Covered under Google Workspace / Google Cloud service levels.
+status_page: https://status.cloud.google.com/
+release_feed: https://developers.google.com/feeds/forms-release-notes.xml
+deprecated_operations: []

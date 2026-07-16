@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of API base host + OAuth authorization host
+notes: >-
+  The Forms API base host (forms.googleapis.com) publishes no /.well-known/
+  discovery documents (all 404). The OAuth 2.0 authorization host referenced by
+  the OpenAPI oauth2 securityScheme (accounts.google.com) publishes OIDC
+  discovery and RFC 8414 authorization-server metadata, saved verbatim here.
+hosts:
+- host: https://forms.googleapis.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://accounts.google.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: google-forms-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: google-forms-oauth-authorization-server.json

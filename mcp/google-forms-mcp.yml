@@ -1,0 +1,52 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+source: openapi/google-forms-api.yaml
+notes: >-
+  Google publishes no first-party hosted/remote MCP server for the Forms API.
+  Several community MCP servers wrap it (e.g. github.com/matteoantoci/google-forms-mcp,
+  github.com/HosakaKeigo/mcp-server-google-forms, and multi-product Google
+  Workspace servers such as github.com/taylorwilsdon/google_workspace_mcp) but
+  none are officially maintained by Google. The tool list below is a CANDIDATE
+  derived one-to-one from the OpenAPI operations.
+community_servers:
+- name: matteoantoci/google-forms-mcp
+  url: https://github.com/matteoantoci/google-forms-mcp
+- name: HosakaKeigo/mcp-server-google-forms
+  url: https://github.com/HosakaKeigo/mcp-server-google-forms
+- name: taylorwilsdon/google_workspace_mcp
+  url: https://github.com/taylorwilsdon/google_workspace_mcp
+server:
+  name: google-forms
+  transport: stdio
+tools:
+- name: create_form
+  description: Create a new form using the title given in the provided form message.
+  source_operation: openapi/google-forms-api.yaml#createForm
+- name: get_form
+  description: Get a form by its ID including structure, items, and settings.
+  source_operation: openapi/google-forms-api.yaml#getForm
+- name: batch_update_form
+  description: Apply a batch of updates to a form (add, remove, or modify items and settings).
+  source_operation: openapi/google-forms-api.yaml#batchUpdateForm
+- name: set_publish_settings
+  description: Update the publish settings of a form (published / accepting responses).
+  source_operation: openapi/google-forms-api.yaml#setPublishSettings
+- name: list_form_responses
+  description: List a form's responses with optional timestamp filtering.
+  source_operation: openapi/google-forms-api.yaml#listFormResponses
+- name: get_form_response
+  description: Get one response from the form by its response ID.
+  source_operation: openapi/google-forms-api.yaml#getFormResponse
+- name: create_watch
+  description: Create a watch to receive Pub/Sub notifications on form changes or new responses.
+  source_operation: openapi/google-forms-api.yaml#createWatch
+- name: list_watches
+  description: List the watches owned by the invoking project for a form.
+  source_operation: openapi/google-forms-api.yaml#listWatches
+- name: delete_watch
+  description: Delete a watch and stop receiving notifications.
+  source_operation: openapi/google-forms-api.yaml#deleteWatch
+- name: renew_watch
+  description: Renew an existing watch for seven days from the current time.
+  source_operation: openapi/google-forms-api.yaml#renewWatch

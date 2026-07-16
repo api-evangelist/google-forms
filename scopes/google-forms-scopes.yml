@@ -1,6 +1,7 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-06-20'
+method: searched
 source: openapi/google-forms-api.yaml
+docs: https://developers.google.com/identity/protocols/oauth2/scopes#forms
 schemes:
 - name: oauth2
   source: openapi/google-forms-api.yaml

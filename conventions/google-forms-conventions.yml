@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/google-forms-api.yaml
+docs: https://developers.google.com/forms/api/reference/rest
+authentication:
+  style: oauth2
+  flows: [authorizationCode]
+  token_placement: Authorization Bearer header
+  cross_ref: authentication/google-forms-authentication.yml
+idempotency:
+  supported: false
+  concurrency_control: >-
+    batchUpdateForm uses a WriteControl object (requiredRevisionId /
+    targetRevisionId) for optimistic concurrency rather than idempotency keys.
+pagination:
+  style: cursor
+  request_params: [pageSize, pageToken]
+  response_fields: [nextPageToken]
+  applies_to: [listFormResponses]
+  note: listWatches returns the full watch set with no pagination.
+field_masks:
+  supported: true
+  param: updateMask
+  note: >-
+    Update requests (updateFormInfo, updateSettings, updateItem) take a
+    comma-separated updateMask naming the fields to change (Google fieldmask
+    convention).
+filtering:
+  supported: true
+  note: listFormResponses accepts a timestamp filter query parameter.
+metadata:
+  output_only_fields: [formId, revisionId, responderUri, linkedSheetId, questionId, responseId, createTime, lastSubmittedTime]
+request_tracing:
+  request_id_header: null
+  note: Standard Google API request context; no documented client request-id echo.
+versioning:
+  style: uri-path
+  current: v1
+  cross_ref: lifecycle/google-forms-lifecycle.yml
+error_envelope:
+  format: google-rpc-status
+  shape: '{ "error": { "code": <int>, "message": <string>, "status": <string> } }'
+  cross_ref: errors/google-forms-problem-types.yml
+rate_limiting:
+  signaling: HTTP 429 / google.rpc quota errors
+  cross_ref: rate-limits/google-forms-rate-limits.yml
+  docs: https://developers.google.com/forms/api/guides/quota
+notifications:
+  mechanism: Cloud Pub/Sub watches (SCHEMA and RESPONSES event types), 7-day expiry, renewable.

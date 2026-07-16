@@ -1,0 +1,80 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/google-forms-api.yaml
+entities:
+- name: Form
+  id_field: formId
+  description: A Google Form with info, settings, and an ordered list of items.
+  relationships:
+  - type: has_one
+    target: Info
+    via: info
+  - type: has_one
+    target: FormSettings
+    via: settings
+  - type: has_many
+    target: Item
+    via: items
+  - type: has_one
+    target: PublishSettings
+    via: publishSettings
+  - type: has_many
+    target: FormResponse
+    via: responses
+  - type: has_many
+    target: Watch
+    via: watches
+- name: Item
+  id_field: itemId
+  description: A single form item - question, question group, text, image, video, or page break.
+  relationships:
+  - type: belongs_to
+    target: Form
+    via: items
+  - type: has_one
+    target: QuestionItem
+    via: questionItem
+  - type: has_one
+    target: QuestionGroupItem
+    via: questionGroupItem
+- name: Question
+  id_field: questionId
+  description: A single question of one of several kinds (choice, text, scale, date, time, file upload, row, rating).
+  relationships:
+  - type: has_one
+    target: Grading
+    via: grading
+- name: FormResponse
+  id_field: responseId
+  description: A respondent submission, with answers keyed by questionId.
+  relationships:
+  - type: belongs_to
+    target: Form
+    via: formId
+  - type: has_many
+    target: Answer
+    via: answers
+- name: Answer
+  id_field: questionId
+  description: One answer within a response, referencing the question by id.
+  relationships:
+  - type: belongs_to
+    target: Question
+    via: questionId
+  - type: belongs_to
+    target: FormResponse
+    via: answers
+- name: Watch
+  id_field: id
+  description: A Pub/Sub notification watch on a form for SCHEMA or RESPONSES events.
+  relationships:
+  - type: belongs_to
+    target: Form
+    via: formId
+  - type: has_one
+    target: CloudPubsubTopic
+    via: target.topic
+id_prefixes:
+  note: >-
+    Form IDs and response IDs are opaque Google-generated strings (Drive-style
+    file IDs for forms). No documented human-readable prefix scheme.

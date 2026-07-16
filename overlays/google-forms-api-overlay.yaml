@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Google Forms API
+  version: 1.0.0
+extends: openapi/google-forms-api.yaml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: google-forms
+    x-apievangelist-artifacts:
+      scopes: scopes/google-forms-scopes.yml
+      authentication: authentication/google-forms-authentication.yml
+      errors: errors/google-forms-problem-types.yml
+      lifecycle: lifecycle/google-forms-lifecycle.yml
+      conventions: conventions/google-forms-conventions.yml
+      data-model: data-model/google-forms-data-model.yml
+- target: $.info
+  update:
+    x-lifecycle-note: >-
+      Forms created via the API after 2026-06-30 default to an unpublished
+      state and must be published with setPublishSettings before accepting
+      responses.
+- target: $.paths['/v1/forms/{formId}:setPublishSettings'].post
+  update:
+    x-apievangelist-note: >-
+      Post-2026-06-30 this is required to make an API-created form accept
+      responses.
+- target: $.tags
+  update:
+  - name: Responses
+    x-read-only: true

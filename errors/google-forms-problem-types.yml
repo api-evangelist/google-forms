@@ -1,0 +1,58 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/google-forms-api.yaml
+format: google-rpc-status
+envelope:
+  media_type: application/json
+  shape: '{ "error": { "code": <int>, "message": <string>, "status": <string> } }'
+  reference: https://cloud.google.com/apis/design/errors
+notes: >-
+  Google APIs return the canonical google.rpc.Status error body rather than
+  RFC 9457 problem+json. The HTTP status, a numeric code mirroring it, a
+  human-readable message, and a symbolic status string are always present.
+problems:
+- status: 400
+  status_symbol: INVALID_ARGUMENT
+  title: Bad request - invalid form data or request
+  remediation: Validate the request body / updateMask against the Form schema before retrying.
+  source_operations:
+  - openapi/google-forms-api.yaml#createForm
+  - openapi/google-forms-api.yaml#batchUpdateForm
+  - openapi/google-forms-api.yaml#setPublishSettings
+  - openapi/google-forms-api.yaml#createWatch
+- status: 401
+  status_symbol: UNAUTHENTICATED
+  title: Unauthorized - invalid or missing authentication
+  remediation: Present a valid OAuth 2.0 access token with the required Forms/Drive scopes.
+  source_operations:
+  - openapi/google-forms-api.yaml#createForm
+  - openapi/google-forms-api.yaml#getForm
+  - openapi/google-forms-api.yaml#batchUpdateForm
+  - openapi/google-forms-api.yaml#setPublishSettings
+  - openapi/google-forms-api.yaml#listFormResponses
+  - openapi/google-forms-api.yaml#getFormResponse
+  - openapi/google-forms-api.yaml#createWatch
+  - openapi/google-forms-api.yaml#listWatches
+  - openapi/google-forms-api.yaml#deleteWatch
+  - openapi/google-forms-api.yaml#renewWatch
+- status: 403
+  status_symbol: PERMISSION_DENIED
+  title: Forbidden - insufficient permissions or project not authorized
+  remediation: Ensure the caller has access to the form and (for watches) the project is authorized on the Pub/Sub topic.
+  source_operations:
+  - openapi/google-forms-api.yaml#createForm
+  - openapi/google-forms-api.yaml#getForm
+- status: 404
+  status_symbol: NOT_FOUND
+  title: Requested entity was not found
+  remediation: Verify the formId / responseId / watchId exists and is visible to the authenticated user.
+  source_operations:
+  - openapi/google-forms-api.yaml#getForm
+  - openapi/google-forms-api.yaml#batchUpdateForm
+  - openapi/google-forms-api.yaml#setPublishSettings
+  - openapi/google-forms-api.yaml#listFormResponses
+  - openapi/google-forms-api.yaml#getFormResponse
+  - openapi/google-forms-api.yaml#createWatch
+  - openapi/google-forms-api.yaml#listWatches
+  - openapi/google-forms-api.yaml#deleteWatch
+  - openapi/google-forms-api.yaml#renewWatch
