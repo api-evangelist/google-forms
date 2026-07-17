@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Safe Form Edit with Write Control
+  summary: Read a form's current revision, apply a batch update guarded by that revision, and confirm the new revision.
+  description: >-
+    A form that several people or jobs can edit needs optimistic concurrency, and
+    the Forms API provides it through write control. This workflow reads the
+    form to capture its current revision id, applies the requested item and
+    settings changes in a batch update that declares that revision as required,
+    and reads the form back to confirm the revision moved. If another writer
+    changed the form between the read and the write, the update is rejected
+    rather than silently overwriting their work. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: safe-form-edit
+  summary: Edit a form without clobbering a concurrent writer, using revision-guarded write control.
+  description: >-
+    Reads the current revision id, retitles the form and updates one existing
+    item under that revision guard, then confirms the resulting revision id.
+  inputs:
+    type: object
+    required:
+    - formId
+    - newTitle
+    - itemIndex
+    - itemTitle
+    properties:
+      formId:
+        type: string
+        description: The id of the form to edit.
+      newTitle:
+        type: string
+        description: The new title to apply to the form.
+      itemIndex:
+        type: integer
+        description: The zero-based index of the existing item to update.
+      itemTitle:
+        type: string
+        description: The new title for the item at itemIndex.
+      itemRequired:
+        type: boolean
+        description: Whether the question at itemIndex must be answered.
+        default: true
+  steps:
+  - stepId: readCurrentRevision
+    description: >-
+      Read the form to capture the revision id the edit will be based on, along
+      with the current items so the caller can confirm itemIndex points at the
+      item they mean to change.
+    operationId: getForm
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      revisionId: $response.body#/revisionId
+      items: $response.body#/items
+      currentTitle: $response.body#/info/title
+  - stepId: applyGuardedUpdate
+    description: >-
+      Apply the title change and the item change in one batch update, declaring
+      the revision read above as required. The service rejects the batch if the
+      form has moved on, which is the concurrency guarantee this flow exists for.
+    operationId: batchUpdateForm
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    requestBody:
+      contentType: application/json
+      payload:
+        includeFormInResponse: true
+        writeControl:
+          requiredRevisionId: $steps.readCurrentRevision.outputs.revisionId
+        requests:
+        - updateFormInfo:
+            info:
+              title: $inputs.newTitle
+            updateMask: title
+        - updateItem:
+            item:
+              title: $inputs.itemTitle
+              questionItem:
+                question:
+                  required: $inputs.itemRequired
+            location:
+              index: $inputs.itemIndex
+            updateMask: title,questionItem.question.required
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetRevisionId: $response.body#/writeControl/targetRevisionId
+      updatedForm: $response.body#/form
+  - stepId: confirmRevision
+    description: >-
+      Read the form back to confirm the applied title and to capture the new
+      revision id to carry into the next edit.
+    operationId: getForm
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      revisionId: $response.body#/revisionId
+      title: $response.body#/info/title
+  outputs:
+    priorRevisionId: $steps.readCurrentRevision.outputs.revisionId
+    revisionId: $steps.confirmRevision.outputs.revisionId
+    title: $steps.confirmRevision.outputs.title

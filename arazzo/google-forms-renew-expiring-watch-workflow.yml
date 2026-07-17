@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Renew an Expiring Watch
+  summary: List a form's watches and renew the existing one, or create a replacement when none survives.
+  description: >-
+    Google Forms watches expire seven days after creation, which makes renewal a
+    recurring job rather than a one-time setup step. This workflow lists the
+    watches owned by the calling project on a form and then branches: when a
+    watch is still registered it is renewed for another seven days, and when the
+    list comes back empty the watch has already lapsed and a replacement is
+    created against the same Pub/Sub topic. Run it on a schedule well inside the
+    seven-day window. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: renew-expiring-watch
+  summary: Keep a form's response watch alive across its seven-day expiry.
+  description: >-
+    Reads the current watches on the form, renews the first one if it exists, and
+    otherwise creates a fresh watch so notification delivery resumes.
+  inputs:
+    type: object
+    required:
+    - formId
+    - topicName
+    properties:
+      formId:
+        type: string
+        description: The id of the watched form.
+      topicName:
+        type: string
+        description: >-
+          Fully qualified Pub/Sub topic used when a replacement watch has to be
+          created, e.g. projects/my-project/topics/forms-notifications.
+      eventType:
+        type: string
+        description: The event type for a replacement watch, either RESPONSES or SCHEMA.
+        default: RESPONSES
+  steps:
+  - stepId: listCurrentWatches
+    description: >-
+      List the watches this project owns on the form. An empty list means the
+      previous watch already expired and was dropped by the service.
+    operationId: listWatches
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      watches: $response.body#/watches
+      existingWatchId: $response.body#/watches/0/id
+      existingExpireTime: $response.body#/watches/0/expireTime
+    onSuccess:
+    - name: watchExists
+      type: goto
+      stepId: renewExisting
+      criteria:
+      - context: $response.body
+        condition: $.watches.length > 0
+        type: jsonpath
+    - name: watchLapsed
+      type: goto
+      stepId: createReplacement
+      criteria:
+      - context: $response.body
+        condition: $.watches.length == 0
+        type: jsonpath
+  - stepId: renewExisting
+    description: >-
+      Renew the existing watch for seven days from now. This preserves the watch
+      id, so no downstream subscriber configuration has to change.
+    operationId: renewWatch
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    - name: watchId
+      in: path
+      value: $steps.listCurrentWatches.outputs.existingWatchId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      watchId: $response.body#/id
+      expireTime: $response.body#/expireTime
+      state: $response.body#/state
+      errorType: $response.body#/errorType
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createReplacement
+    description: >-
+      Create a replacement watch against the same Pub/Sub topic when no watch
+      survived. The new watch carries a new id.
+    operationId: createWatch
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    requestBody:
+      contentType: application/json
+      payload:
+        watch:
+          eventType: $inputs.eventType
+          target:
+            topic:
+              topicName: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      watchId: $response.body#/id
+      expireTime: $response.body#/expireTime
+      state: $response.body#/state
+  outputs:
+    renewedWatchId: $steps.renewExisting.outputs.watchId
+    renewedExpireTime: $steps.renewExisting.outputs.expireTime
+    replacementWatchId: $steps.createReplacement.outputs.watchId
+    replacementExpireTime: $steps.createReplacement.outputs.expireTime

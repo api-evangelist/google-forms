@@ -125,6 +125,30 @@ common:
     url: rules/google-forms-spectral-rules.yml
   - type: Vocabulary
     url: vocabulary/google-forms-vocabulary.yaml
+  - type: Arazzo
+    url: arazzo/google-forms-create-and-publish-form-workflow.yml
+    name: Google Forms Create and Publish a Form
+  - type: Arazzo
+    url: arazzo/google-forms-harvest-form-responses-workflow.yml
+    name: Google Forms Harvest Form Responses
+  - type: Arazzo
+    url: arazzo/google-forms-subscribe-response-notifications-workflow.yml
+    name: Google Forms Subscribe to Response Notifications
+  - type: Arazzo
+    url: arazzo/google-forms-renew-expiring-watch-workflow.yml
+    name: Google Forms Renew an Expiring Watch
+  - type: Arazzo
+    url: arazzo/google-forms-safe-form-edit-workflow.yml
+    name: Google Forms Safe Form Edit with Write Control
+  - type: Arazzo
+    url: arazzo/google-forms-build-and-grade-quiz-workflow.yml
+    name: Google Forms Build and Grade a Quiz
+  - type: Arazzo
+    url: arazzo/google-forms-close-form-and-export-workflow.yml
+    name: Google Forms Close a Form and Export Final Responses
+  - type: Arazzo
+    url: arazzo/google-forms-unsubscribe-form-watches-workflow.yml
+    name: Google Forms Unsubscribe Form Watches
   - type: Features
     data:
     - name: Form Creation

@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Subscribe to Response Notifications
+  summary: Verify a form, register a Cloud Pub/Sub watch for new responses, and confirm the watch is active.
+  description: >-
+    Polling a form for new responses is the wrong default when the API can push.
+    This workflow verifies the target form is reachable, registers a watch that
+    publishes RESPONSES events to a Cloud Pub/Sub topic, and then lists the
+    watches on the form to confirm the new one is ACTIVE and to capture its
+    expiry, which matters because Google Forms watches lapse after seven days.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: subscribe-response-notifications
+  summary: Register a Pub/Sub watch so new form responses arrive as events.
+  description: >-
+    Confirms the form exists, creates a RESPONSES watch pointed at a fully
+    qualified Pub/Sub topic, and reads the watch list back to verify state and
+    expiry.
+  inputs:
+    type: object
+    required:
+    - formId
+    - topicName
+    properties:
+      formId:
+        type: string
+        description: The id of the form to watch.
+      topicName:
+        type: string
+        description: >-
+          Fully qualified Pub/Sub topic to publish to, in the form
+          projects/my-project/topics/forms-notifications. The Forms service
+          account must already hold publish rights on this topic.
+  steps:
+  - stepId: verifyForm
+    description: >-
+      Confirm the form is reachable by this credential before registering a
+      watch against it, so an authorization problem surfaces here rather than as
+      a silently undelivered notification later.
+    operationId: getForm
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      formTitle: $response.body#/info/title
+      responderUri: $response.body#/responderUri
+  - stepId: createResponseWatch
+    description: >-
+      Create a watch that emits an event to the Pub/Sub topic each time a
+      response is submitted to the form.
+    operationId: createWatch
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    requestBody:
+      contentType: application/json
+      payload:
+        watch:
+          eventType: RESPONSES
+          target:
+            topic:
+              topicName: $inputs.topicName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      watchId: $response.body#/id
+      expireTime: $response.body#/expireTime
+      state: $response.body#/state
+  - stepId: confirmWatch
+    description: >-
+      List the watches on the form to confirm the new watch is registered and
+      ACTIVE, and to capture the expiry that a renewal job will need.
+    operationId: listWatches
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.watches.length > 0
+      type: jsonpath
+    outputs:
+      watches: $response.body#/watches
+  outputs:
+    watchId: $steps.createResponseWatch.outputs.watchId
+    expireTime: $steps.createResponseWatch.outputs.expireTime
+    state: $steps.createResponseWatch.outputs.state
+    watches: $steps.confirmWatch.outputs.watches

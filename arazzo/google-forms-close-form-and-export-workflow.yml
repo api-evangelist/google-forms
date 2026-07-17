@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Close a Form and Export Final Responses
+  summary: Stop a form accepting responses, then take the final response export and record the closing state.
+  description: >-
+    Closing a survey is an ordered job, not a single call. Responses are stopped
+    first so the set cannot grow while it is being exported, the final responses
+    are then listed, and the form is read back to record the closing state and
+    the linked sheet id for the archive. Doing it in the other order leaves a
+    race in which a late submission lands after the export and is lost. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: close-form-and-export
+  summary: Stop collection on a form and take a clean final export of its responses.
+  description: >-
+    Sets the form to stop accepting responses while leaving it published, lists
+    the final responses, and reads the form back for its closing state.
+  inputs:
+    type: object
+    required:
+    - formId
+    properties:
+      formId:
+        type: string
+        description: The id of the form to close.
+      keepPublished:
+        type: boolean
+        description: >-
+          Whether the form stays published while closed. Left true, responders
+          see a closed form rather than a broken link.
+        default: true
+      pageSize:
+        type: integer
+        description: Maximum number of responses to return per page in the export.
+        default: 100
+  steps:
+  - stepId: stopAcceptingResponses
+    description: >-
+      Close the form to new responses first, so the export below runs against a
+      set that can no longer change. The form stays published by default, which
+      shows responders a closed notice instead of an error.
+    operationId: setPublishSettings
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    requestBody:
+      contentType: application/json
+      payload:
+        publishSettings:
+          isPublished: $inputs.keepPublished
+          isAcceptingResponses: false
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isPublished: $response.body#/isPublished
+      isAcceptingResponses: $response.body#/isAcceptingResponses
+  - stepId: exportFinalResponses
+    description: >-
+      List the final set of responses. Collection is already closed, so this is a
+      stable export; follow the next page token until it is absent to take the
+      whole set.
+    operationId: listFormResponses
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    - name: pageSize
+      in: query
+      value: $inputs.pageSize
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      responses: $response.body#/responses
+      nextPageToken: $response.body#/nextPageToken
+  - stepId: recordClosingState
+    description: >-
+      Read the form back to archive its final structure, publish settings, and
+      the linked sheet id that holds the accumulated responses.
+    operationId: getForm
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      formTitle: $response.body#/info/title
+      items: $response.body#/items
+      revisionId: $response.body#/revisionId
+      linkedSheetId: $response.body#/linkedSheetId
+      publishSettings: $response.body#/publishSettings
+  outputs:
+    isAcceptingResponses: $steps.stopAcceptingResponses.outputs.isAcceptingResponses
+    responses: $steps.exportFinalResponses.outputs.responses
+    nextPageToken: $steps.exportFinalResponses.outputs.nextPageToken
+    linkedSheetId: $steps.recordClosingState.outputs.linkedSheetId
+    revisionId: $steps.recordClosingState.outputs.revisionId

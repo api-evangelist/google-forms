@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Unsubscribe Form Watches
+  summary: List the watches registered on a form and delete one to stop its notification delivery.
+  description: >-
+    The teardown half of the watch lifecycle. Watch ids are not something an
+    integration usually holds onto, so removing a subscription starts by listing
+    what the calling project actually has registered on the form, and then
+    deleting the identified watch to stop delivery to its Pub/Sub topic. Worth
+    running when decommissioning an integration or when a watch is failing
+    delivery and should be replaced rather than renewed. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: unsubscribe-form-watches
+  summary: Find and remove a form's registered watch to stop notifications.
+  description: >-
+    Lists the watches this project owns on the form, then deletes the first one
+    returned so notification delivery stops.
+  inputs:
+    type: object
+    required:
+    - formId
+    properties:
+      formId:
+        type: string
+        description: The id of the form whose watch should be removed.
+  steps:
+  - stepId: listRegisteredWatches
+    description: >-
+      List the watches this project owns on the form. This is the only way to
+      recover a watch id that was not persisted at creation time, and it also
+      surfaces each watch's state and error type so a failing subscription can be
+      told apart from a healthy one.
+    operationId: listWatches
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.watches.length > 0
+      type: jsonpath
+    outputs:
+      watches: $response.body#/watches
+      watchId: $response.body#/watches/0/id
+      state: $response.body#/watches/0/state
+      errorType: $response.body#/watches/0/errorType
+  - stepId: deleteWatch
+    description: >-
+      Delete the identified watch. Delivery to its Pub/Sub topic stops
+      immediately; the topic itself is untouched and has to be cleaned up
+      separately if it is no longer needed.
+    operationId: deleteWatch
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    - name: watchId
+      in: path
+      value: $steps.listRegisteredWatches.outputs.watchId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      deletedWatchId: $steps.listRegisteredWatches.outputs.watchId
+  outputs:
+    watches: $steps.listRegisteredWatches.outputs.watches
+    deletedWatchId: $steps.deleteWatch.outputs.deletedWatchId

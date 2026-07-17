@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Harvest Form Responses
+  summary: Read a form's question structure, page through its responses since a timestamp, and pull one response in full.
+  description: >-
+    Form responses key their answers by question id, not by question title, so
+    any pipeline that moves responses into a warehouse or a CRM has to read the
+    form structure first to build the question id to title map. This workflow
+    resolves that structure, lists the responses submitted since a supplied
+    timestamp, and then retrieves a single response in full for the detail the
+    list view does not carry. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: harvest-form-responses
+  summary: Pull new form responses with the question structure needed to interpret them.
+  description: >-
+    Reads the form items to map question ids to titles, lists responses filtered
+    by submission timestamp, and fetches the first returned response by id.
+  inputs:
+    type: object
+    required:
+    - formId
+    - submittedAfter
+    properties:
+      formId:
+        type: string
+        description: The id of the form to harvest (e.g. 1BxiMVs0XRA5nFMdLXDSR2r9NphkU4V9qeeW0nQmGR8).
+      submittedAfter:
+        type: string
+        description: RFC 3339 timestamp; only responses submitted after this are returned (e.g. 2026-04-15T00:00:00Z).
+      pageSize:
+        type: integer
+        description: Maximum number of responses to return per page. Defaults to 50 in this flow.
+        default: 50
+  steps:
+  - stepId: readFormStructure
+    description: >-
+      Read the form to capture its items. Each answer in a response is keyed by
+      question id, so this structure is what makes the harvested answers
+      interpretable downstream.
+    operationId: getForm
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/items
+      formTitle: $response.body#/info/title
+      linkedSheetId: $response.body#/linkedSheetId
+  - stepId: listResponses
+    description: >-
+      List the responses submitted after the supplied timestamp. The next page
+      token is carried out so a caller can resume paging on the next run.
+    operationId: listFormResponses
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    - name: filter
+      in: query
+      value: "timestamp > $inputs.submittedAfter"
+    - name: pageSize
+      in: query
+      value: $inputs.pageSize
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      responses: $response.body#/responses
+      firstResponseId: $response.body#/responses/0/responseId
+      nextPageToken: $response.body#/nextPageToken
+  - stepId: getResponseDetail
+    description: >-
+      Retrieve the first returned response by id for the full answer payload,
+      including any file upload answers and the respondent email when the form
+      collects it.
+    operationId: getFormResponse
+    parameters:
+    - name: formId
+      in: path
+      value: $inputs.formId
+    - name: responseId
+      in: path
+      value: $steps.listResponses.outputs.firstResponseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      responseId: $response.body#/responseId
+      answers: $response.body#/answers
+      respondentEmail: $response.body#/respondentEmail
+      lastSubmittedTime: $response.body#/lastSubmittedTime
+  outputs:
+    formTitle: $steps.readFormStructure.outputs.formTitle
+    items: $steps.readFormStructure.outputs.items
+    responses: $steps.listResponses.outputs.responses
+    nextPageToken: $steps.listResponses.outputs.nextPageToken
+    answers: $steps.getResponseDetail.outputs.answers

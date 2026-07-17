@@ -1,0 +1,160 @@
+arazzo: 1.0.1
+info:
+  title: Google Forms Build and Grade a Quiz
+  summary: Create a form, switch it into quiz mode with a graded question, publish it, and read scored submissions.
+  description: >-
+    A quiz is a form with grading turned on, which means it is built through the
+    same create and batch update path but with a distinct payload: quiz settings
+    are switched on through updateSettings, and each question carries a grading
+    block holding its point value, correct answers, and feedback. This workflow
+    builds that quiz, publishes it, and then reads responses back for the total
+    score the service computes on submission. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleFormsApi
+  url: ../openapi/google-forms-api.yaml
+  type: openapi
+workflows:
+- workflowId: build-and-grade-quiz
+  summary: Stand up an auto-graded quiz form and harvest the scored submissions.
+  description: >-
+    Creates the form, enables quiz settings and adds one graded multiple-choice
+    question in a single batch update, publishes the quiz, and lists responses
+    carrying the computed total score.
+  inputs:
+    type: object
+    required:
+    - title
+    - questionTitle
+    - correctAnswer
+    - distractorOne
+    - distractorTwo
+    properties:
+      title:
+        type: string
+        description: The title of the quiz (e.g. "Geography Check").
+      questionTitle:
+        type: string
+        description: The text of the graded question.
+      correctAnswer:
+        type: string
+        description: The option value that is the correct answer.
+      distractorOne:
+        type: string
+        description: The first incorrect option value.
+      distractorTwo:
+        type: string
+        description: The second incorrect option value.
+      pointValue:
+        type: integer
+        description: Points awarded for a correct answer.
+        default: 10
+  steps:
+  - stepId: createQuizForm
+    description: >-
+      Create the underlying form with its title. Quiz mode cannot be set at
+      creation and is switched on by the batch update that follows.
+    operationId: createForm
+    requestBody:
+      contentType: application/json
+      payload:
+        info:
+          title: $inputs.title
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      formId: $response.body#/formId
+      revisionId: $response.body#/revisionId
+  - stepId: enableQuizAndAddQuestion
+    description: >-
+      Turn on quiz settings and add the graded question in one batch update. The
+      grading block carries the point value, the correct answer used for
+      automatic scoring, and the feedback shown for right and wrong answers.
+    operationId: batchUpdateForm
+    parameters:
+    - name: formId
+      in: path
+      value: $steps.createQuizForm.outputs.formId
+    requestBody:
+      contentType: application/json
+      payload:
+        includeFormInResponse: true
+        writeControl:
+          requiredRevisionId: $steps.createQuizForm.outputs.revisionId
+        requests:
+        - updateSettings:
+            settings:
+              quizSettings:
+                isQuiz: true
+            updateMask: quizSettings.isQuiz
+        - createItem:
+            item:
+              title: $inputs.questionTitle
+              questionItem:
+                question:
+                  required: true
+                  grading:
+                    pointValue: $inputs.pointValue
+                    correctAnswers:
+                      answers:
+                      - value: $inputs.correctAnswer
+                    whenRight:
+                      text: Correct.
+                    whenWrong:
+                      text: Not quite. Review the material and try again.
+                  choiceQuestion:
+                    type: RADIO
+                    shuffle: true
+                    options:
+                    - value: $inputs.correctAnswer
+                    - value: $inputs.distractorOne
+                    - value: $inputs.distractorTwo
+            location:
+              index: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      questionItemId: $response.body#/replies/1/createItem/itemId
+      revisionId: $response.body#/writeControl/targetRevisionId
+  - stepId: publishQuiz
+    description: Publish the quiz and open it for submissions.
+    operationId: setPublishSettings
+    parameters:
+    - name: formId
+      in: path
+      value: $steps.createQuizForm.outputs.formId
+    requestBody:
+      contentType: application/json
+      payload:
+        publishSettings:
+          isPublished: true
+          isAcceptingResponses: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isPublished: $response.body#/isPublished
+  - stepId: readScoredResponses
+    description: >-
+      List submissions for the quiz. On a quiz form each response carries the
+      total score the service computed at submission time, and each answer
+      carries its own grade, so no scoring logic is needed on this side.
+    operationId: listFormResponses
+    parameters:
+    - name: formId
+      in: path
+      value: $steps.createQuizForm.outputs.formId
+    - name: pageSize
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      responses: $response.body#/responses
+      firstTotalScore: $response.body#/responses/0/totalScore
+      nextPageToken: $response.body#/nextPageToken
+  outputs:
+    formId: $steps.createQuizForm.outputs.formId
+    questionItemId: $steps.enableQuizAndAddQuestion.outputs.questionItemId
+    responses: $steps.readScoredResponses.outputs.responses
