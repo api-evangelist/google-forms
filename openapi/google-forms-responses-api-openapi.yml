@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: Google Forms Responses API
+  description: The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, and set up watches for notifications on form changes and new responses.
+  version: v1
+  contact:
+    name: Google
+    url: https://developers.google.com/forms/api
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://forms.googleapis.com
+  description: Google Forms API production server
+security:
+- oauth2: []
+tags:
+- name: Responses
+  description: Operations for reading form responses
+paths:
+  /v1/forms/{formId}/responses:
+    get:
+      operationId: listFormResponses
+      summary: Google Forms List Form Responses
+      description: List a form's responses with optional filtering by timestamp.
+      tags:
+      - Responses
+      parameters:
+      - name: formId
+        in: path
+        required: true
+        description: The ID of the form whose responses to list.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        description: Filter for responses using timestamp comparison.
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        description: The maximum number of responses to return.
+        schema:
+          type: integer
+          format: int32
+      - name: pageToken
+        in: query
+        required: false
+        description: Page token returned from a previous list call.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with list of form responses.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFormResponsesResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/forms/{formId}/responses/{responseId}:
+    get:
+      operationId: getFormResponse
+      summary: Google Forms Get Form Response
+      description: Get one response from the form by its response ID.
+      tags:
+      - Responses
+      parameters:
+      - name: formId
+        in: path
+        required: true
+        description: The ID of the form.
+        schema:
+          type: string
+      - name: responseId
+        in: path
+        required: true
+        description: The ID of the response to retrieve.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with the form response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Response not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TextLink:
+      type: object
+      description: A text link.
+      properties:
+        uri:
+          type: string
+          description: The URI to link to.
+          example: https://example.com/learn-more
+        displayText:
+          type: string
+          description: The text to display for the link.
+          example: Learn More
+    FileUploadAnswers:
+      type: object
+      description: File upload answers to a question.
+      properties:
+        answers:
+          type: array
+          description: Output only. The file upload answers.
+          items:
+            $ref: '#/components/schemas/FileUploadAnswer'
+    FileUploadAnswer:
+      type: object
+      description: A single file upload answer.
+      properties:
+        fileId:
+          type: string
+          description: Output only. The Google Drive file ID.
+          readOnly: true
+          example: 1AbCdEfGhIjKlMnOp
+        fileName:
+          type: string
+          description: Output only. The file name.
+          readOnly: true
+          example: response-attachment.pdf
+        mimeType:
+          type: string
+          description: Output only. The MIME type of the file.
+          readOnly: true
+          example: application/pdf
+    ExtraMaterial:
+      type: object
+      description: Extra material that can be shown as feedback.
+      properties:
+        link:
+          $ref: '#/components/schemas/TextLink'
+        video:
+          $ref: '#/components/schemas/VideoLink'
+    VideoLink:
+      type: object
+      description: A video link.
+      properties:
+        displayText:
+          type: string
+          description: The text to display for the video.
+          example: Watch Tutorial
+        youtubeUri:
+          type: string
+          description: The YouTube URI of the video.
+          example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    TextAnswers:
+      type: object
+      description: Text-based answers to a question.
+      properties:
+        answers:
+          type: array
+          description: Output only. The text answers.
+          items:
+            $ref: '#/components/schemas/TextAnswer'
+    Error:
+      type: object
+      description: An error response from the API.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code.
+              example: 404
+            message:
+              type: string
+              description: A human-readable error message.
+              example: Requested entity was not found.
+            status:
+              type: string
+              description: The error status code.
+              example: NOT_FOUND
+    TextAnswer:
+      type: object
+      description: A single text answer value.
+      properties:
+        value:
+          type: string
+          description: Output only. The answer value.
+          readOnly: true
+          example: Very Satisfied
+    Grade:
+      type: object
+      description: The grade for an answer on a quiz form.
+      properties:
+        score:
+          type: number
+          description: Output only. The numeric score awarded.
+          readOnly: true
+          example: 10.0
+        correct:
+          type: boolean
+          description: Output only. Whether the answer was correct.
+          readOnly: true
+          example: true
+        feedback:
+          $ref: '#/components/schemas/Feedback'
+    Feedback:
+      type: object
+      description: Feedback shown after answering a quiz question.
+      properties:
+        text:
+          type: string
+          description: The feedback text.
+          example: Great job!
+        material:
+          type: array
+          description: Additional material shown with feedback.
+          items:
+            $ref: '#/components/schemas/ExtraMaterial'
+    ListFormResponsesResponse:
+      type: object
+      description: Response from listing form responses.
+      properties:
+        responses:
+          type: array
+          description: The list of form responses.
+          items:
+            $ref: '#/components/schemas/FormResponse'
+        nextPageToken:
+          type: string
+          description: Token for retrieving the next page of responses.
+          example: CiAKGjBpNDd2...
+    Answer:
+      type: object
+      description: An answer to a question.
+      properties:
+        questionId:
+          type: string
+          description: Output only. The question's ID.
+          readOnly: true
+          example: 7e8f9a0b
+        grade:
+          $ref: '#/components/schemas/Grade'
+        textAnswers:
+          $ref: '#/components/schemas/TextAnswers'
+        fileUploadAnswers:
+          $ref: '#/components/schemas/FileUploadAnswers'
+    FormResponse:
+      type: object
+      description: A response to a Google Form.
+      properties:
+        formId:
+          type: string
+          description: Output only. The form ID.
+          readOnly: true
+          example: 1BxiMVs0XRA5nFMdLXDSR2r9NphkU4V9qeeW0nQmGR8
+        responseId:
+          type: string
+          description: Output only. The response ID.
+          readOnly: true
+          example: ACYDBNhq7TU3h6Vk...
+        createTime:
+          type: string
+          format: date-time
+          description: Output only. Timestamp for the first time the response was submitted.
+          readOnly: true
+          example: '2026-04-15T10:30:00Z'
+        lastSubmittedTime:
+          type: string
+          format: date-time
+          description: Output only. Timestamp for the most recent time the response was submitted.
+          readOnly: true
+          example: '2026-04-15T10:30:00Z'
+        respondentEmail:
+          type: string
+          format: email
+          description: Output only. The email address of the respondent if collected.
+          readOnly: true
+          example: respondent@example.com
+        answers:
+          type: object
+          description: Output only. The actual answers keyed by question ID.
+          additionalProperties:
+            $ref: '#/components/schemas/Answer'
+        totalScore:
+          type: number
+          description: Output only. Total points awarded for the submission on quiz forms.
+          readOnly: true
+          example: 85.0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Forms API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/forms.body: View and manage your forms in Google Drive
+            https://www.googleapis.com/auth/forms.body.readonly: View your forms in Google Drive
+            https://www.googleapis.com/auth/forms.responses.readonly: View responses to your Google Forms
+            https://www.googleapis.com/auth/drive: See, edit, create, and delete all of your Google Drive files
+            https://www.googleapis.com/auth/drive.file: View and manage Google Drive files created with this app
+            https://www.googleapis.com/auth/drive.readonly: View files in your Google Drive
