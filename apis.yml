@@ -4,6 +4,19 @@ description: The Google Forms API is a RESTful interface that lets you create an
   form responses, set up watches for notifications on form changes and new responses, and integrate forms with external applications.
 url: https://developers.google.com/forms/api
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png
 created: '2024-01-15'
 modified: '2026-06-20'
@@ -17,60 +30,135 @@ tags:
   - Responses
   - Surveys
 apis:
-  - name: Google Forms API v1
-    description: Create and modify Google Forms, read form responses and structure, set up watches for change notifications,
-      and integrate forms with external applications via Cloud Pub/Sub.
-    image: https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png
-    humanURL: https://developers.google.com/forms/api
-    baseURL: https://forms.googleapis.com/v1
-    tags:
-    - Forms
-    - Google
-    - Questionnaires
-    - Responses
-    - Surveys
-    - Watches
-    properties:
-    - type: Documentation
-      url: https://developers.google.com/forms/api/reference/rest
-    - type: OpenAPI
-      url: openapi/google-forms-api.yaml
-    - type: JSONSchema
-      url: json-schema/google-forms-api-form-schema.json
-    - type: JSONSchema
-      url: json-schema/google-forms-api-form-response-schema.json
-    - type: JSONSchema
-      url: json-schema/google-forms-api-watch-schema.json
-    - type: JSONSchema
-      url: json-schema/google-forms-api-question-schema.json
-    - type: JSONStructure
-      url: json-structure/google-forms-api-form-structure.json
-    - type: JSONStructure
-      url: json-structure/google-forms-api-form-response-structure.json
-    - type: JSONStructure
-      url: json-structure/google-forms-api-watch-structure.json
-    - type: JSONStructure
-      url: json-structure/google-forms-api-question-structure.json
-    - type: Examples
-      url: examples/google-forms-api-form-example.json
-    - type: Examples
-      url: examples/google-forms-api-form-response-example.json
-    - type: Examples
-      url: examples/google-forms-api-watch-example.json
-    - type: Examples
-      url: examples/google-forms-api-question-example.json
-    - type: APIReference
-      url: https://developers.google.com/forms/api/reference/rest
-    - type: GettingStarted
-      url: https://developers.google.com/forms/api/quickstart/python
-    - type: Authentication
-      url: https://developers.google.com/forms/api/guides/auth
-    - type: Overlay
-      url: overlays/google-forms-api-overlay.yaml
-    contact:
-    - type: Support
-      url: https://support.google.com/docs/answer/6281888
+- aid: google-forms:google-forms-forms-api
+  name: Google Forms Forms API
+  description: Operations for creating, reading, and updating forms
+  humanURL: https://developers.google.com/forms/api
+  baseURL: https://forms.googleapis.com/v1
+  tags:
+  - Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/google-forms-forms-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: JSONSchema
+    url: json-schema/google-forms-api-form-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-form-response-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-watch-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-question-schema.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-form-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-form-response-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-watch-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-question-structure.json
+  - type: Examples
+    url: examples/google-forms-api-form-example.json
+  - type: Examples
+    url: examples/google-forms-api-form-response-example.json
+  - type: Examples
+    url: examples/google-forms-api-watch-example.json
+  - type: Examples
+    url: examples/google-forms-api-question-example.json
+  - type: APIReference
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: GettingStarted
+    url: https://developers.google.com/forms/api/quickstart/python
+  - type: Authentication
+    url: https://developers.google.com/forms/api/guides/auth
+- aid: google-forms:google-forms-responses-api
+  name: Google Forms Responses API
+  description: Operations for reading form responses
+  humanURL: https://developers.google.com/forms/api
+  baseURL: https://forms.googleapis.com/v1
+  tags:
+  - Responses
+  properties:
+  - type: OpenAPI
+    url: openapi/google-forms-responses-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: JSONSchema
+    url: json-schema/google-forms-api-form-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-form-response-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-watch-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-question-schema.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-form-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-form-response-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-watch-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-question-structure.json
+  - type: Examples
+    url: examples/google-forms-api-form-example.json
+  - type: Examples
+    url: examples/google-forms-api-form-response-example.json
+  - type: Examples
+    url: examples/google-forms-api-watch-example.json
+  - type: Examples
+    url: examples/google-forms-api-question-example.json
+  - type: APIReference
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: GettingStarted
+    url: https://developers.google.com/forms/api/quickstart/python
+  - type: Authentication
+    url: https://developers.google.com/forms/api/guides/auth
+- aid: google-forms:google-forms-watches-api
+  name: Google Forms Watches API
+  description: Operations for managing form change notifications
+  humanURL: https://developers.google.com/forms/api
+  baseURL: https://forms.googleapis.com/v1
+  tags:
+  - Watches
+  properties:
+  - type: OpenAPI
+    url: openapi/google-forms-watches-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: JSONSchema
+    url: json-schema/google-forms-api-form-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-form-response-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-watch-schema.json
+  - type: JSONSchema
+    url: json-schema/google-forms-api-question-schema.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-form-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-form-response-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-watch-structure.json
+  - type: JSONStructure
+    url: json-structure/google-forms-api-question-structure.json
+  - type: Examples
+    url: examples/google-forms-api-form-example.json
+  - type: Examples
+    url: examples/google-forms-api-form-response-example.json
+  - type: Examples
+    url: examples/google-forms-api-watch-example.json
+  - type: Examples
+    url: examples/google-forms-api-question-example.json
+  - type: APIReference
+    url: https://developers.google.com/forms/api/reference/rest
+  - type: GettingStarted
+    url: https://developers.google.com/forms/api/quickstart/python
+  - type: Authentication
+    url: https://developers.google.com/forms/api/guides/auth
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/google-forms/overview
   - type: AgenticAccess
     url: agentic-access/google-forms-agentic-access.yml
   - type: Packages
