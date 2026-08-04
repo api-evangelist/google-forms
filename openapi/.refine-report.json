@@ -1,0 +1,18 @@
+{
+  "provider": "google-forms",
+  "sources": [
+    "google-forms-forms-api-openapi.yml",
+    "google-forms-responses-api-openapi.yml",
+    "google-forms-watches-api-openapi.yml"
+  ],
+  "outputs": [
+    "google-forms-forms-api-openapi.yml",
+    "google-forms-responses-api-openapi.yml",
+    "google-forms-watches-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

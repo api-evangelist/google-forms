@@ -1,0 +1,1005 @@
+{
+  "info": {
+    "_postman_id": "ac5a9fbd-b647-4f22-bc41-bea266aaadec",
+    "name": "Google Forms Watches API",
+    "description": "The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, and set up watches for notifications on form changes and new responses.\n\nContact Support:\n Name: Google",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:49:15.000Z",
+    "updatedAt": "2026-07-28T01:49:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ac5a9fbd-b647-4f22-bc41-bea266aaadec"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "forms",
+          "item": [
+            {
+              "name": "{formId}",
+              "item": [
+                {
+                  "name": "watches",
+                  "item": [
+                    {
+                      "name": "{watchId}",
+                      "item": [
+                        {
+                          "name": "Google Forms Delete Watch",
+                          "id": "64fbdcb4-7961-4408-a736-ef7ee0675a83",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches/:watchId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches",
+                                ":watchId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fff18232-a1f8-47d1-8673-7ee64adc3710",
+                                  "key": "formId",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the form."
+                                },
+                                {
+                                  "id": "b3deff1d-589f-4bb0-8299-93a18d12f534",
+                                  "key": "watchId",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the watch to delete."
+                                }
+                              ]
+                            },
+                            "description": "Delete a watch and stop receiving notifications."
+                          },
+                          "response": [
+                            {
+                              "id": "c3f5b732-e801-4643-aeff-f72364f54d69",
+                              "name": "Watch successfully deleted.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/watches/:watchId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "watches",
+                                    ":watchId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    },
+                                    {
+                                      "key": "watchId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:49:15.000Z",
+                              "updatedAt": "2026-07-28T01:49:15.000Z",
+                              "uid": "35240-c3f5b732-e801-4643-aeff-f72364f54d69"
+                            },
+                            {
+                              "id": "f736e7fd-87aa-415b-b1ee-95fb1f1033e4",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/watches/:watchId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "watches",
+                                    ":watchId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    },
+                                    {
+                                      "key": "watchId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:49:15.000Z",
+                              "updatedAt": "2026-07-28T01:49:15.000Z",
+                              "uid": "35240-f736e7fd-87aa-415b-b1ee-95fb1f1033e4"
+                            },
+                            {
+                              "id": "bef2599a-84be-48c9-96df-ed29989f0c57",
+                              "name": "Watch not found.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/watches/:watchId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "watches",
+                                    ":watchId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    },
+                                    {
+                                      "key": "watchId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:49:15.000Z",
+                              "updatedAt": "2026-07-28T01:49:15.000Z",
+                              "uid": "35240-bef2599a-84be-48c9-96df-ed29989f0c57"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-64fbdcb4-7961-4408-a736-ef7ee0675a83"
+                        }
+                      ],
+                      "id": "4e6741fb-28fd-48be-8834-0f484a455b58",
+                      "createdAt": "2026-07-28T01:49:15.000Z",
+                      "updatedAt": "2026-07-28T01:49:15.000Z",
+                      "uid": "35240-4e6741fb-28fd-48be-8834-0f484a455b58"
+                    },
+                    {
+                      "name": "{watchId}:renew",
+                      "item": [
+                        {
+                          "name": "Google Forms Renew Watch",
+                          "id": "cb8044cc-83c9-43d0-90bb-bfc77ef8d565",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches/{{watchId}}:renew",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches",
+                                "{{watchId}}:renew"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4c161702-44f2-48a5-b06c-281be9fc617d",
+                                  "key": "formId",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the form."
+                                }
+                              ]
+                            },
+                            "description": "Renew an existing watch for seven days from the current time."
+                          },
+                          "response": [
+                            {
+                              "id": "39247969-017c-47a6-a84f-b0fdb6b68278",
+                              "name": "Successful response with the renewed watch.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/watches/{{watchId}}:renew",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "watches",
+                                    "{{watchId}}:renew"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"target\": {\n    \"topic\": {\n      \"topicName\": \"<string>\"\n    }\n  },\n  \"eventType\": \"RESPONSES\",\n  \"createTime\": \"<dateTime>\",\n  \"expireTime\": \"<dateTime>\",\n  \"errorType\": \"OTHER_ERRORS\",\n  \"state\": \"STATE_UNSPECIFIED\"\n}",
+                              "createdAt": "2026-07-28T01:49:15.000Z",
+                              "updatedAt": "2026-07-28T01:49:15.000Z",
+                              "uid": "35240-39247969-017c-47a6-a84f-b0fdb6b68278"
+                            },
+                            {
+                              "id": "330d6ac5-e72f-4d19-8338-262f81b4ad88",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/watches/{{watchId}}:renew",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "watches",
+                                    "{{watchId}}:renew"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:49:15.000Z",
+                              "updatedAt": "2026-07-28T01:49:15.000Z",
+                              "uid": "35240-330d6ac5-e72f-4d19-8338-262f81b4ad88"
+                            },
+                            {
+                              "id": "cc792f9a-da25-4183-815d-9a5b4e6324b8",
+                              "name": "Watch not found.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/watches/{{watchId}}:renew",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "watches",
+                                    "{{watchId}}:renew"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:49:15.000Z",
+                              "updatedAt": "2026-07-28T01:49:15.000Z",
+                              "uid": "35240-cc792f9a-da25-4183-815d-9a5b4e6324b8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-cb8044cc-83c9-43d0-90bb-bfc77ef8d565"
+                        }
+                      ],
+                      "id": "445d8468-5a75-4247-bb31-e9398b774f8c",
+                      "createdAt": "2026-07-28T01:49:15.000Z",
+                      "updatedAt": "2026-07-28T01:49:15.000Z",
+                      "uid": "35240-445d8468-5a75-4247-bb31-e9398b774f8c"
+                    },
+                    {
+                      "name": "Google Forms Create Watch",
+                      "id": "dd9e37b8-9966-46dd-8138-5658247438e4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"watch\": {\n    \"id\": \"<string>\",\n    \"target\": {\n      \"topic\": {\n        \"topicName\": \"<string>\"\n      }\n    },\n    \"eventType\": \"SCHEMA\",\n    \"createTime\": \"<dateTime>\",\n    \"expireTime\": \"<dateTime>\",\n    \"errorType\": \"NO_USER_ACCESS\",\n    \"state\": \"SUSPENDED\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "forms",
+                            ":formId",
+                            "watches"
+                          ],
+                          "variable": [
+                            {
+                              "id": "351fd6b0-219a-45cc-a8e3-c53a4a207c81",
+                              "key": "formId",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the form to watch."
+                            }
+                          ]
+                        },
+                        "description": "Create a new watch to receive notifications about form changes or new responses via Cloud Pub/Sub."
+                      },
+                      "response": [
+                        {
+                          "id": "a9c0b16f-4909-4910-ab82-4f3ecfe74861",
+                          "name": "Successful response with the created watch.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"watch\": {\n    \"id\": \"<string>\",\n    \"target\": {\n      \"topic\": {\n        \"topicName\": \"<string>\"\n      }\n    },\n    \"eventType\": \"SCHEMA\",\n    \"createTime\": \"<dateTime>\",\n    \"expireTime\": \"<dateTime>\",\n    \"errorType\": \"NO_USER_ACCESS\",\n    \"state\": \"SUSPENDED\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"target\": {\n    \"topic\": {\n      \"topicName\": \"<string>\"\n    }\n  },\n  \"eventType\": \"RESPONSES\",\n  \"createTime\": \"<dateTime>\",\n  \"expireTime\": \"<dateTime>\",\n  \"errorType\": \"OTHER_ERRORS\",\n  \"state\": \"STATE_UNSPECIFIED\"\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-a9c0b16f-4909-4910-ab82-4f3ecfe74861"
+                        },
+                        {
+                          "id": "a18875ff-b022-42ca-82a6-61487c42a2ff",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"watch\": {\n    \"id\": \"<string>\",\n    \"target\": {\n      \"topic\": {\n        \"topicName\": \"<string>\"\n      }\n    },\n    \"eventType\": \"SCHEMA\",\n    \"createTime\": \"<dateTime>\",\n    \"expireTime\": \"<dateTime>\",\n    \"errorType\": \"NO_USER_ACCESS\",\n    \"state\": \"SUSPENDED\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-a18875ff-b022-42ca-82a6-61487c42a2ff"
+                        },
+                        {
+                          "id": "68db4db9-8dbc-4e94-bad2-6fea49fb74cc",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"watch\": {\n    \"id\": \"<string>\",\n    \"target\": {\n      \"topic\": {\n        \"topicName\": \"<string>\"\n      }\n    },\n    \"eventType\": \"SCHEMA\",\n    \"createTime\": \"<dateTime>\",\n    \"expireTime\": \"<dateTime>\",\n    \"errorType\": \"NO_USER_ACCESS\",\n    \"state\": \"SUSPENDED\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-68db4db9-8dbc-4e94-bad2-6fea49fb74cc"
+                        },
+                        {
+                          "id": "7273bd44-b47c-4a7a-943e-4728beffd396",
+                          "name": "Form not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"watch\": {\n    \"id\": \"<string>\",\n    \"target\": {\n      \"topic\": {\n        \"topicName\": \"<string>\"\n      }\n    },\n    \"eventType\": \"SCHEMA\",\n    \"createTime\": \"<dateTime>\",\n    \"expireTime\": \"<dateTime>\",\n    \"errorType\": \"NO_USER_ACCESS\",\n    \"state\": \"SUSPENDED\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-7273bd44-b47c-4a7a-943e-4728beffd396"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:15.000Z",
+                      "updatedAt": "2026-07-28T01:49:15.000Z",
+                      "uid": "35240-dd9e37b8-9966-46dd-8138-5658247438e4"
+                    },
+                    {
+                      "name": "Google Forms List Watches",
+                      "id": "88fbe6ec-d212-4855-9b6b-f56d0ca20a6d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "forms",
+                            ":formId",
+                            "watches"
+                          ],
+                          "variable": [
+                            {
+                              "id": "54858a0b-14f6-43b7-89ff-4cd873abc186",
+                              "key": "formId",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the form whose watches to list."
+                            }
+                          ]
+                        },
+                        "description": "Return a list of the watches owned by the invoking project for the specified form."
+                      },
+                      "response": [
+                        {
+                          "id": "ce78c058-cf23-45d7-9f8d-41567265c37d",
+                          "name": "Successful response with the list of watches.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"watches\": [\n    {\n      \"id\": \"<string>\",\n      \"target\": {\n        \"topic\": {\n          \"topicName\": \"<string>\"\n        }\n      },\n      \"eventType\": \"EVENT_TYPE_UNSPECIFIED\",\n      \"createTime\": \"<dateTime>\",\n      \"expireTime\": \"<dateTime>\",\n      \"errorType\": \"ERROR_TYPE_UNSPECIFIED\",\n      \"state\": \"SUSPENDED\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"target\": {\n        \"topic\": {\n          \"topicName\": \"<string>\"\n        }\n      },\n      \"eventType\": \"SCHEMA\",\n      \"createTime\": \"<dateTime>\",\n      \"expireTime\": \"<dateTime>\",\n      \"errorType\": \"NO_USER_ACCESS\",\n      \"state\": \"ACTIVE\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-ce78c058-cf23-45d7-9f8d-41567265c37d"
+                        },
+                        {
+                          "id": "917f1d32-8470-4ba1-b5a1-8f36a9ca375e",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-917f1d32-8470-4ba1-b5a1-8f36a9ca375e"
+                        },
+                        {
+                          "id": "e4f3f050-874e-48e3-8af1-1444ba2916e5",
+                          "name": "Form not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/watches",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "watches"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:15.000Z",
+                          "updatedAt": "2026-07-28T01:49:15.000Z",
+                          "uid": "35240-e4f3f050-874e-48e3-8af1-1444ba2916e5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:15.000Z",
+                      "updatedAt": "2026-07-28T01:49:15.000Z",
+                      "uid": "35240-88fbe6ec-d212-4855-9b6b-f56d0ca20a6d"
+                    }
+                  ],
+                  "id": "4085bcd5-b3e2-4e07-a89c-8410f0a31ca1",
+                  "createdAt": "2026-07-28T01:49:15.000Z",
+                  "updatedAt": "2026-07-28T01:49:15.000Z",
+                  "uid": "35240-4085bcd5-b3e2-4e07-a89c-8410f0a31ca1"
+                }
+              ],
+              "id": "1e9bd5ba-7d74-48f6-8443-2f44d8d3b212",
+              "createdAt": "2026-07-28T01:49:15.000Z",
+              "updatedAt": "2026-07-28T01:49:15.000Z",
+              "uid": "35240-1e9bd5ba-7d74-48f6-8443-2f44d8d3b212"
+            }
+          ],
+          "id": "f9e5df76-bb68-418f-85a4-aafe3d1538e8",
+          "createdAt": "2026-07-28T01:49:15.000Z",
+          "updatedAt": "2026-07-28T01:49:15.000Z",
+          "uid": "35240-f9e5df76-bb68-418f-85a4-aafe3d1538e8"
+        }
+      ],
+      "id": "3a4eca52-2941-42e7-b145-07a47be45a33",
+      "createdAt": "2026-07-28T01:49:15.000Z",
+      "updatedAt": "2026-07-28T01:49:15.000Z",
+      "uid": "35240-3a4eca52-2941-42e7-b145-07a47be45a33"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/forms.body https://www.googleapis.com/auth/forms.body.readonly https://www.googleapis.com/auth/forms.responses.readonly https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://forms.googleapis.com"
+    },
+    {
+      "key": "watchId",
+      "value": "<string>"
+    }
+  ]
+}

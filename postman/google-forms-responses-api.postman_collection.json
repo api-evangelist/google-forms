@@ -1,0 +1,561 @@
+{
+  "info": {
+    "_postman_id": "08c16efc-eeed-4582-b2f4-fa981ab51320",
+    "name": "Google Forms Responses API",
+    "description": "The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, and set up watches for notifications on form changes and new responses.\n\nContact Support:\n Name: Google",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:49:14.000Z",
+    "updatedAt": "2026-07-28T01:49:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-08c16efc-eeed-4582-b2f4-fa981ab51320"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "forms",
+          "item": [
+            {
+              "name": "{formId}",
+              "item": [
+                {
+                  "name": "responses",
+                  "item": [
+                    {
+                      "name": "{responseId}",
+                      "item": [
+                        {
+                          "name": "Google Forms Get Form Response",
+                          "id": "15c80705-0b81-4cb9-bb08-d0b967a20d00",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/responses/:responseId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "responses",
+                                ":responseId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "af9e6c39-9d6c-470f-ac55-b52a42ceab57",
+                                  "key": "formId",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the form."
+                                },
+                                {
+                                  "id": "0e3a4ba3-b7f6-4c5f-9d20-c460b81633ea",
+                                  "key": "responseId",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the response to retrieve."
+                                }
+                              ]
+                            },
+                            "description": "Get one response from the form by its response ID."
+                          },
+                          "response": [
+                            {
+                              "id": "a518a026-e710-4bd6-a05e-44f6f29b39c4",
+                              "name": "Successful response with the form response.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/responses/:responseId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "responses",
+                                    ":responseId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    },
+                                    {
+                                      "key": "responseId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"formId\": \"<string>\",\n  \"responseId\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"lastSubmittedTime\": \"<dateTime>\",\n  \"respondentEmail\": \"<email>\",\n  \"answers\": {\n    \"consequatafd\": {\n      \"questionId\": \"<string>\",\n      \"grade\": {\n        \"score\": \"<number>\",\n        \"correct\": \"<boolean>\",\n        \"feedback\": {\n          \"text\": \"<string>\",\n          \"material\": [\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            },\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            }\n          ]\n        }\n      },\n      \"textAnswers\": {\n        \"answers\": [\n          {\n            \"value\": \"<string>\"\n          },\n          {\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      \"fileUploadAnswers\": {\n        \"answers\": [\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          },\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          }\n        ]\n      }\n    },\n    \"ut_201\": {\n      \"questionId\": \"<string>\",\n      \"grade\": {\n        \"score\": \"<number>\",\n        \"correct\": \"<boolean>\",\n        \"feedback\": {\n          \"text\": \"<string>\",\n          \"material\": [\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            },\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            }\n          ]\n        }\n      },\n      \"textAnswers\": {\n        \"answers\": [\n          {\n            \"value\": \"<string>\"\n          },\n          {\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      \"fileUploadAnswers\": {\n        \"answers\": [\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          },\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          }\n        ]\n      }\n    },\n    \"cupidatat_8\": {\n      \"questionId\": \"<string>\",\n      \"grade\": {\n        \"score\": \"<number>\",\n        \"correct\": \"<boolean>\",\n        \"feedback\": {\n          \"text\": \"<string>\",\n          \"material\": [\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            },\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            }\n          ]\n        }\n      },\n      \"textAnswers\": {\n        \"answers\": [\n          {\n            \"value\": \"<string>\"\n          },\n          {\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      \"fileUploadAnswers\": {\n        \"answers\": [\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          },\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          }\n        ]\n      }\n    },\n    \"aute97d\": {\n      \"questionId\": \"<string>\",\n      \"grade\": {\n        \"score\": \"<number>\",\n        \"correct\": \"<boolean>\",\n        \"feedback\": {\n          \"text\": \"<string>\",\n          \"material\": [\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            },\n            {\n              \"link\": {\n                \"uri\": \"<string>\",\n                \"displayText\": \"<string>\"\n              },\n              \"video\": {\n                \"displayText\": \"<string>\",\n                \"youtubeUri\": \"<string>\"\n              }\n            }\n          ]\n        }\n      },\n      \"textAnswers\": {\n        \"answers\": [\n          {\n            \"value\": \"<string>\"\n          },\n          {\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      \"fileUploadAnswers\": {\n        \"answers\": [\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          },\n          {\n            \"fileId\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"mimeType\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"totalScore\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T01:49:14.000Z",
+                              "updatedAt": "2026-07-28T01:49:14.000Z",
+                              "uid": "35240-a518a026-e710-4bd6-a05e-44f6f29b39c4"
+                            },
+                            {
+                              "id": "8b620198-f332-4cee-ac70-4beb154f67ef",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/responses/:responseId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "responses",
+                                    ":responseId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    },
+                                    {
+                                      "key": "responseId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:49:14.000Z",
+                              "updatedAt": "2026-07-28T01:49:14.000Z",
+                              "uid": "35240-8b620198-f332-4cee-ac70-4beb154f67ef"
+                            },
+                            {
+                              "id": "89ec967f-81de-4eb9-bae9-87f189c8c7d7",
+                              "name": "Response not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/forms/:formId/responses/:responseId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "forms",
+                                    ":formId",
+                                    "responses",
+                                    ":responseId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "formId"
+                                    },
+                                    {
+                                      "key": "responseId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:49:14.000Z",
+                              "updatedAt": "2026-07-28T01:49:14.000Z",
+                              "uid": "35240-89ec967f-81de-4eb9-bae9-87f189c8c7d7"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:49:14.000Z",
+                          "updatedAt": "2026-07-28T01:49:14.000Z",
+                          "uid": "35240-15c80705-0b81-4cb9-bb08-d0b967a20d00"
+                        }
+                      ],
+                      "id": "596b32f6-4a38-4b6e-9912-3237d8d37401",
+                      "createdAt": "2026-07-28T01:49:14.000Z",
+                      "updatedAt": "2026-07-28T01:49:14.000Z",
+                      "uid": "35240-596b32f6-4a38-4b6e-9912-3237d8d37401"
+                    },
+                    {
+                      "name": "Google Forms List Form Responses",
+                      "id": "4d5ec1f1-c922-48e3-919a-fc741fb5534a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/forms/:formId/responses?filter=<string>&pageSize=<integer>&pageToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "forms",
+                            ":formId",
+                            "responses"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter for responses using timestamp comparison.",
+                              "key": "filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of responses to return.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page token returned from a previous list call.",
+                              "key": "pageToken",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "2fa1d21a-f573-45bd-a05e-d4a694499707",
+                              "key": "formId",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the form whose responses to list."
+                            }
+                          ]
+                        },
+                        "description": "List a form's responses with optional filtering by timestamp."
+                      },
+                      "response": [
+                        {
+                          "id": "480d7a05-4e18-4caf-8b99-bcc8d5d64b4e",
+                          "name": "Successful response with list of form responses.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/responses?filter=<string>&pageSize=<integer>&pageToken=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "responses"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter for responses using timestamp comparison.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of responses to return.",
+                                  "key": "pageSize",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page token returned from a previous list call.",
+                                  "key": "pageToken",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"responses\": [\n    {\n      \"formId\": \"<string>\",\n      \"responseId\": \"<string>\",\n      \"createTime\": \"<dateTime>\",\n      \"lastSubmittedTime\": \"<dateTime>\",\n      \"respondentEmail\": \"<email>\",\n      \"answers\": {\n        \"eiusmod24\": {\n          \"questionId\": \"<string>\",\n          \"grade\": {\n            \"score\": \"<number>\",\n            \"correct\": \"<boolean>\",\n            \"feedback\": {\n              \"text\": \"<string>\",\n              \"material\": [\n                {\n                  \"link\": {\n                    \"uri\": \"<string>\",\n                    \"displayText\": \"<string>\"\n                  },\n                  \"video\": {\n                    \"displayText\": \"<string>\",\n                    \"youtubeUri\": \"<string>\"\n                  }\n                },\n                {\n                  \"link\": {\n                    \"uri\": \"<string>\",\n                    \"displayText\": \"<string>\"\n                  },\n                  \"video\": {\n                    \"displayText\": \"<string>\",\n                    \"youtubeUri\": \"<string>\"\n                  }\n                }\n              ]\n            }\n          },\n          \"textAnswers\": {\n            \"answers\": [\n              {\n                \"value\": \"<string>\"\n              },\n              {\n                \"value\": \"<string>\"\n              }\n            ]\n          },\n          \"fileUploadAnswers\": {\n            \"answers\": [\n              {\n                \"fileId\": \"<string>\",\n                \"fileName\": \"<string>\",\n                \"mimeType\": \"<string>\"\n              },\n              {\n                \"fileId\": \"<string>\",\n                \"fileName\": \"<string>\",\n                \"mimeType\": \"<string>\"\n              }\n            ]\n          }\n        },\n        \"in_6\": {\n          \"questionId\": \"<string>\",\n          \"grade\": {\n            \"score\": \"<number>\",\n            \"correct\": \"<boolean>\",\n            \"feedback\": {\n              \"text\": \"<string>\",\n              \"material\": [\n                {\n                  \"link\": {\n                    \"uri\": \"<string>\",\n                    \"displayText\": \"<string>\"\n                  },\n                  \"video\": {\n                    \"displayText\": \"<string>\",\n                    \"youtubeUri\": \"<string>\"\n                  }\n                },\n                {\n                  \"link\": {\n                    \"uri\": \"<string>\",\n                    \"displayText\": \"<string>\"\n                  },\n                  \"video\": {\n                    \"displayText\": \"<string>\",\n                    \"youtubeUri\": \"<string>\"\n                  }\n                }\n              ]\n            }\n          },\n          \"textAnswers\": {\n            \"answers\": [\n              {\n                \"value\": \"<string>\"\n              },\n              {\n                \"value\": \"<string>\"\n              }\n            ]\n          },\n          \"fileUploadAnswers\": {\n            \"answers\": [\n              {\n                \"fileId\": \"<string>\",\n                \"fileName\": \"<string>\",\n                \"mimeType\": \"<string>\"\n              },\n              {\n                \"fileId\": \"<string>\",\n                \"fileName\": \"<string>\",\n                \"mimeType\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"totalScore\": \"<number>\"\n    },\n    {\n      \"formId\": \"<string>\",\n      \"responseId\": \"<string>\",\n      \"createTime\": \"<dateTime>\",\n      \"lastSubmittedTime\": \"<dateTime>\",\n      \"respondentEmail\": \"<email>\",\n      \"answers\": {\n        \"dolore_bb4\": {\n          \"questionId\": \"<string>\",\n          \"grade\": {\n            \"score\": \"<number>\",\n            \"correct\": \"<boolean>\",\n            \"feedback\": {\n              \"text\": \"<string>\",\n              \"material\": [\n                {\n                  \"link\": {\n                    \"uri\": \"<string>\",\n                    \"displayText\": \"<string>\"\n                  },\n                  \"video\": {\n                    \"displayText\": \"<string>\",\n                    \"youtubeUri\": \"<string>\"\n                  }\n                },\n                {\n                  \"link\": {\n                    \"uri\": \"<string>\",\n                    \"displayText\": \"<string>\"\n                  },\n                  \"video\": {\n                    \"displayText\": \"<string>\",\n                    \"youtubeUri\": \"<string>\"\n                  }\n                }\n              ]\n            }\n          },\n          \"textAnswers\": {\n            \"answers\": [\n              {\n                \"value\": \"<string>\"\n              },\n              {\n                \"value\": \"<string>\"\n              }\n            ]\n          },\n          \"fileUploadAnswers\": {\n            \"answers\": [\n              {\n                \"fileId\": \"<string>\",\n                \"fileName\": \"<string>\",\n                \"mimeType\": \"<string>\"\n              },\n              {\n                \"fileId\": \"<string>\",\n                \"fileName\": \"<string>\",\n                \"mimeType\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"totalScore\": \"<number>\"\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:49:14.000Z",
+                          "updatedAt": "2026-07-28T01:49:14.000Z",
+                          "uid": "35240-480d7a05-4e18-4caf-8b99-bcc8d5d64b4e"
+                        },
+                        {
+                          "id": "2661e6f4-7099-403f-8625-b3cc6db13557",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/responses?filter=<string>&pageSize=<integer>&pageToken=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "responses"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter for responses using timestamp comparison.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of responses to return.",
+                                  "key": "pageSize",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page token returned from a previous list call.",
+                                  "key": "pageToken",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:14.000Z",
+                          "updatedAt": "2026-07-28T01:49:14.000Z",
+                          "uid": "35240-2661e6f4-7099-403f-8625-b3cc6db13557"
+                        },
+                        {
+                          "id": "6f85d05b-548e-4692-9027-5bab43672596",
+                          "name": "Form not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/forms/:formId/responses?filter=<string>&pageSize=<integer>&pageToken=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "forms",
+                                ":formId",
+                                "responses"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter for responses using timestamp comparison.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of responses to return.",
+                                  "key": "pageSize",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page token returned from a previous list call.",
+                                  "key": "pageToken",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "formId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:49:14.000Z",
+                          "updatedAt": "2026-07-28T01:49:14.000Z",
+                          "uid": "35240-6f85d05b-548e-4692-9027-5bab43672596"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:49:14.000Z",
+                      "updatedAt": "2026-07-28T01:49:14.000Z",
+                      "uid": "35240-4d5ec1f1-c922-48e3-919a-fc741fb5534a"
+                    }
+                  ],
+                  "id": "d7e643d2-79fe-4926-8777-232487af45cb",
+                  "createdAt": "2026-07-28T01:49:14.000Z",
+                  "updatedAt": "2026-07-28T01:49:14.000Z",
+                  "uid": "35240-d7e643d2-79fe-4926-8777-232487af45cb"
+                }
+              ],
+              "id": "eae8efc2-51d2-4e1a-8bb3-dd08f76b131a",
+              "createdAt": "2026-07-28T01:49:14.000Z",
+              "updatedAt": "2026-07-28T01:49:14.000Z",
+              "uid": "35240-eae8efc2-51d2-4e1a-8bb3-dd08f76b131a"
+            }
+          ],
+          "id": "ad05c62e-aef9-4aaa-af6a-f1d6c12413f1",
+          "createdAt": "2026-07-28T01:49:14.000Z",
+          "updatedAt": "2026-07-28T01:49:14.000Z",
+          "uid": "35240-ad05c62e-aef9-4aaa-af6a-f1d6c12413f1"
+        }
+      ],
+      "id": "78f555e7-2009-4083-ade2-a62326c10208",
+      "createdAt": "2026-07-28T01:49:14.000Z",
+      "updatedAt": "2026-07-28T01:49:14.000Z",
+      "uid": "35240-78f555e7-2009-4083-ade2-a62326c10208"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/forms.body https://www.googleapis.com/auth/forms.body.readonly https://www.googleapis.com/auth/forms.responses.readonly https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://forms.googleapis.com"
+    }
+  ]
+}

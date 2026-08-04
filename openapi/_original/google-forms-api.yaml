@@ -1,0 +1,1400 @@
+openapi: 3.0.3
+info:
+  title: Google Forms API
+  description: >-
+    The Google Forms API is a RESTful interface that lets you create and modify
+    Google Forms programmatically, read form responses, and set up watches for
+    notifications on form changes and new responses.
+  version: v1
+  contact:
+    name: Google
+    url: https://developers.google.com/forms/api
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+
+servers:
+  - url: https://forms.googleapis.com
+    description: Google Forms API production server
+
+security:
+  - oauth2: []
+
+tags:
+  - name: Forms
+    description: Operations for creating, reading, and updating forms
+  - name: Responses
+    description: Operations for reading form responses
+  - name: Watches
+    description: Operations for managing form change notifications
+
+paths:
+  /v1/forms:
+    post:
+      operationId: createForm
+      summary: Google Forms Create Form
+      description: Create a new form using the title given in the provided form message in the request body.
+      tags:
+        - Forms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+      responses:
+        '200':
+          description: Successful response with the created form.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '400':
+          description: Bad request - invalid form data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - invalid or missing authentication.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - insufficient permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}:
+    get:
+      operationId: getForm
+      summary: Google Forms Get Form
+      description: Get a form by its ID including the form structure, items, and settings.
+      tags:
+        - Forms
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the form.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}:batchUpdate:
+    post:
+      operationId: batchUpdateForm
+      summary: Google Forms Batch Update Form
+      description: Change the form with a batch of updates including adding, removing, or modifying items and settings.
+      tags:
+        - Forms
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchUpdateFormRequest'
+      responses:
+        '200':
+          description: Successful response with the updated form.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchUpdateFormResponse'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}:setPublishSettings:
+    post:
+      operationId: setPublishSettings
+      summary: Google Forms Set Publish Settings
+      description: Updates the publish settings of a form including whether the form is published and accepting responses.
+      tags:
+        - Forms
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form to update publish settings for.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPublishSettingsRequest'
+      responses:
+        '200':
+          description: Successful response with the updated publish settings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishSettings'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}/responses:
+    get:
+      operationId: listFormResponses
+      summary: Google Forms List Form Responses
+      description: List a form's responses with optional filtering by timestamp.
+      tags:
+        - Responses
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form whose responses to list.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter for responses using timestamp comparison.
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          required: false
+          description: The maximum number of responses to return.
+          schema:
+            type: integer
+            format: int32
+        - name: pageToken
+          in: query
+          required: false
+          description: Page token returned from a previous list call.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with list of form responses.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFormResponsesResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}/responses/{responseId}:
+    get:
+      operationId: getFormResponse
+      summary: Google Forms Get Form Response
+      description: Get one response from the form by its response ID.
+      tags:
+        - Responses
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form.
+          schema:
+            type: string
+        - name: responseId
+          in: path
+          required: true
+          description: The ID of the response to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the form response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Response not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}/watches:
+    post:
+      operationId: createWatch
+      summary: Google Forms Create Watch
+      description: Create a new watch to receive notifications about form changes or new responses via Cloud Pub/Sub.
+      tags:
+        - Watches
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form to watch.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWatchRequest'
+      responses:
+        '200':
+          description: Successful response with the created watch.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watch'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listWatches
+      summary: Google Forms List Watches
+      description: Return a list of the watches owned by the invoking project for the specified form.
+      tags:
+        - Watches
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form whose watches to list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the list of watches.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWatchesResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Form not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}/watches/{watchId}:
+    delete:
+      operationId: deleteWatch
+      summary: Google Forms Delete Watch
+      description: Delete a watch and stop receiving notifications.
+      tags:
+        - Watches
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form.
+          schema:
+            type: string
+        - name: watchId
+          in: path
+          required: true
+          description: The ID of the watch to delete.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Watch successfully deleted.
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Watch not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v1/forms/{formId}/watches/{watchId}:renew:
+    post:
+      operationId: renewWatch
+      summary: Google Forms Renew Watch
+      description: Renew an existing watch for seven days from the current time.
+      tags:
+        - Watches
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          description: The ID of the form.
+          schema:
+            type: string
+        - name: watchId
+          in: path
+          required: true
+          description: The ID of the watch to renew.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the renewed watch.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watch'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Watch not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Forms API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/forms.body: View and manage your forms in Google Drive
+            https://www.googleapis.com/auth/forms.body.readonly: View your forms in Google Drive
+            https://www.googleapis.com/auth/forms.responses.readonly: View responses to your Google Forms
+            https://www.googleapis.com/auth/drive: See, edit, create, and delete all of your Google Drive files
+            https://www.googleapis.com/auth/drive.file: View and manage Google Drive files created with this app
+            https://www.googleapis.com/auth/drive.readonly: View files in your Google Drive
+
+  schemas:
+    Form:
+      type: object
+      description: A Google Form with items, settings, and metadata.
+      properties:
+        formId:
+          type: string
+          description: Output only. The form ID.
+          readOnly: true
+          example: "1BxiMVs0XRA5nFMdLXDSR2r9NphkU4V9qeeW0nQmGR8"
+        info:
+          $ref: '#/components/schemas/Info'
+        settings:
+          $ref: '#/components/schemas/FormSettings'
+        items:
+          type: array
+          description: A list of the form's items including section headers, questions, and media.
+          items:
+            $ref: '#/components/schemas/Item'
+        revisionId:
+          type: string
+          description: Output only. The revision ID of the form used in write control for updates.
+          readOnly: true
+          example: "00000042"
+        responderUri:
+          type: string
+          description: Output only. The form URI to share with responders.
+          readOnly: true
+          example: "https://docs.google.com/forms/d/e/1FAIpQLSd.../viewform"
+        linkedSheetId:
+          type: string
+          description: Output only. The ID of the linked Google Sheet accumulating responses.
+          readOnly: true
+          example: "1a2b3c4d5e"
+        publishSettings:
+          $ref: '#/components/schemas/PublishSettings'
+
+    Info:
+      type: object
+      description: General information about the form.
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Required. The title of the form visible to responders.
+          example: "Customer Feedback Survey"
+        documentTitle:
+          type: string
+          description: Output only. The title of the document visible in Google Drive.
+          readOnly: true
+          example: "Customer Feedback Survey"
+        description:
+          type: string
+          description: The description of the form.
+          example: "Please share your feedback about our services."
+
+    FormSettings:
+      type: object
+      description: Form-level settings including quiz configuration.
+      properties:
+        quizSettings:
+          $ref: '#/components/schemas/QuizSettings'
+        emailCollectionType:
+          type: string
+          description: Determines how email addresses are collected.
+          enum:
+            - EMAIL_COLLECTION_TYPE_UNSPECIFIED
+            - DO_NOT_COLLECT
+            - VERIFIED
+            - RESPONDER_INPUT
+          example: "VERIFIED"
+
+    QuizSettings:
+      type: object
+      description: Settings related to quiz forms and grading.
+      properties:
+        isQuiz:
+          type: boolean
+          description: Whether this form is a quiz.
+          example: false
+
+    PublishSettings:
+      type: object
+      description: Settings controlling the publish state of the form.
+      properties:
+        isPublished:
+          type: boolean
+          description: Whether the form is published.
+          example: true
+        isAcceptingResponses:
+          type: boolean
+          description: Whether the form is currently accepting responses.
+          example: true
+
+    Item:
+      type: object
+      description: A single item in a form which can be a question, text, image, video, or page break.
+      properties:
+        itemId:
+          type: string
+          description: The ID of the item.
+          example: "4a5b6c7d"
+        title:
+          type: string
+          description: The title of the item.
+          example: "How satisfied are you with our service?"
+        description:
+          type: string
+          description: The description of the item.
+          example: "Please rate on a scale of 1-5"
+        questionItem:
+          $ref: '#/components/schemas/QuestionItem'
+        questionGroupItem:
+          $ref: '#/components/schemas/QuestionGroupItem'
+        pageBreakItem:
+          type: object
+          description: A page break item marking the start of a new page.
+        textItem:
+          type: object
+          description: A text item displaying information.
+        imageItem:
+          $ref: '#/components/schemas/ImageItem'
+        videoItem:
+          $ref: '#/components/schemas/VideoItem'
+
+    QuestionItem:
+      type: object
+      description: A form item containing a single question.
+      properties:
+        question:
+          $ref: '#/components/schemas/Question'
+        image:
+          $ref: '#/components/schemas/Image'
+
+    QuestionGroupItem:
+      type: object
+      description: A form item containing a group of questions presented as a grid.
+      properties:
+        questions:
+          type: array
+          description: The list of questions in this group.
+          items:
+            $ref: '#/components/schemas/Question'
+        image:
+          $ref: '#/components/schemas/Image'
+        grid:
+          $ref: '#/components/schemas/Grid'
+
+    Question:
+      type: object
+      description: A question in a form.
+      properties:
+        questionId:
+          type: string
+          description: Output only. The ID of the question.
+          readOnly: true
+          example: "7e8f9a0b"
+        required:
+          type: boolean
+          description: Whether the question must be answered to submit the form.
+          example: true
+        grading:
+          $ref: '#/components/schemas/Grading'
+        choiceQuestion:
+          $ref: '#/components/schemas/ChoiceQuestion'
+        textQuestion:
+          $ref: '#/components/schemas/TextQuestion'
+        scaleQuestion:
+          $ref: '#/components/schemas/ScaleQuestion'
+        dateQuestion:
+          $ref: '#/components/schemas/DateQuestion'
+        timeQuestion:
+          $ref: '#/components/schemas/TimeQuestion'
+        fileUploadQuestion:
+          $ref: '#/components/schemas/FileUploadQuestion'
+        rowQuestion:
+          $ref: '#/components/schemas/RowQuestion'
+        ratingQuestion:
+          $ref: '#/components/schemas/RatingQuestion'
+
+    ChoiceQuestion:
+      type: object
+      description: A question with predefined choices.
+      properties:
+        type:
+          type: string
+          description: The type of choice question.
+          enum:
+            - CHOICE_TYPE_UNSPECIFIED
+            - RADIO
+            - CHECKBOX
+            - DROP_DOWN
+          example: "RADIO"
+        options:
+          type: array
+          description: The list of available options.
+          items:
+            $ref: '#/components/schemas/Option'
+        shuffle:
+          type: boolean
+          description: Whether the options should be displayed in random order.
+          example: false
+
+    Option:
+      type: object
+      description: An option for a choice question.
+      properties:
+        value:
+          type: string
+          description: The text value of the option.
+          example: "Very Satisfied"
+        image:
+          $ref: '#/components/schemas/Image'
+        isOther:
+          type: boolean
+          description: Whether this is an 'Other' option with a free text field.
+          example: false
+        goToAction:
+          type: string
+          description: Action to take when this option is selected.
+          enum:
+            - GO_TO_ACTION_UNSPECIFIED
+            - NEXT_SECTION
+            - RESTART_FORM
+            - SUBMIT_FORM
+        goToSectionId:
+          type: string
+          description: The item ID of the section to navigate to.
+
+    TextQuestion:
+      type: object
+      description: A question that accepts text input.
+      properties:
+        paragraph:
+          type: boolean
+          description: Whether the question accepts paragraph (long) text.
+          example: false
+
+    ScaleQuestion:
+      type: object
+      description: A question with a numeric scale.
+      properties:
+        low:
+          type: integer
+          description: The lowest value on the scale.
+          example: 1
+        high:
+          type: integer
+          description: The highest value on the scale.
+          example: 5
+        lowLabel:
+          type: string
+          description: Label for the low end of the scale.
+          example: "Not Satisfied"
+        highLabel:
+          type: string
+          description: Label for the high end of the scale.
+          example: "Very Satisfied"
+
+    DateQuestion:
+      type: object
+      description: A question that collects a date.
+      properties:
+        includeTime:
+          type: boolean
+          description: Whether to include a time component.
+          example: false
+        includeYear:
+          type: boolean
+          description: Whether to include a year component.
+          example: true
+
+    TimeQuestion:
+      type: object
+      description: A question that collects a time.
+      properties:
+        duration:
+          type: boolean
+          description: Whether the question is about a duration rather than a time of day.
+          example: false
+
+    FileUploadQuestion:
+      type: object
+      description: A question that allows file upload.
+      properties:
+        folderId:
+          type: string
+          description: The Drive folder ID where uploaded files are stored.
+          example: "1AbCdEfGhIjKlMnOpQrStUvWxYz"
+        types:
+          type: array
+          description: Allowed file types for upload.
+          items:
+            type: string
+            enum:
+              - FILE_TYPE_UNSPECIFIED
+              - ANY
+              - DOCUMENT
+              - PRESENTATION
+              - SPREADSHEET
+              - DRAWING
+              - PDF
+              - IMAGE
+              - VIDEO
+              - AUDIO
+        maxFiles:
+          type: integer
+          description: Maximum number of files a respondent can upload.
+          example: 5
+        maxFileSize:
+          type: string
+          description: Maximum file size in bytes.
+          example: "10485760"
+
+    RowQuestion:
+      type: object
+      description: A row in a question group (grid).
+      properties:
+        title:
+          type: string
+          description: The title of the row.
+          example: "Product Quality"
+
+    RatingQuestion:
+      type: object
+      description: A question with a rating input.
+      properties:
+        ratingScaleLevel:
+          type: integer
+          description: The number of rating levels.
+          example: 5
+        iconType:
+          type: string
+          description: The type of icon to display for the rating.
+          enum:
+            - ICON_TYPE_UNSPECIFIED
+            - STAR
+            - HEART
+            - THUMB_UP
+          example: "STAR"
+
+    Grading:
+      type: object
+      description: Grading configuration for a quiz question.
+      properties:
+        pointValue:
+          type: integer
+          description: The number of points available for this question.
+          example: 10
+        correctAnswers:
+          $ref: '#/components/schemas/CorrectAnswers'
+        whenRight:
+          $ref: '#/components/schemas/Feedback'
+        whenWrong:
+          $ref: '#/components/schemas/Feedback'
+        generalFeedback:
+          $ref: '#/components/schemas/Feedback'
+
+    CorrectAnswers:
+      type: object
+      description: The correct answers for grading.
+      properties:
+        answers:
+          type: array
+          description: A list of correct answers.
+          items:
+            $ref: '#/components/schemas/CorrectAnswer'
+
+    CorrectAnswer:
+      type: object
+      description: A single correct answer value.
+      properties:
+        value:
+          type: string
+          description: The correct answer value.
+          example: "Paris"
+
+    Feedback:
+      type: object
+      description: Feedback shown after answering a quiz question.
+      properties:
+        text:
+          type: string
+          description: The feedback text.
+          example: "Great job!"
+        material:
+          type: array
+          description: Additional material shown with feedback.
+          items:
+            $ref: '#/components/schemas/ExtraMaterial'
+
+    ExtraMaterial:
+      type: object
+      description: Extra material that can be shown as feedback.
+      properties:
+        link:
+          $ref: '#/components/schemas/TextLink'
+        video:
+          $ref: '#/components/schemas/VideoLink'
+
+    TextLink:
+      type: object
+      description: A text link.
+      properties:
+        uri:
+          type: string
+          description: The URI to link to.
+          example: "https://example.com/learn-more"
+        displayText:
+          type: string
+          description: The text to display for the link.
+          example: "Learn More"
+
+    VideoLink:
+      type: object
+      description: A video link.
+      properties:
+        displayText:
+          type: string
+          description: The text to display for the video.
+          example: "Watch Tutorial"
+        youtubeUri:
+          type: string
+          description: The YouTube URI of the video.
+          example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+    Image:
+      type: object
+      description: An image in a form.
+      properties:
+        contentUri:
+          type: string
+          description: Output only. A URI for the image content.
+          readOnly: true
+        altText:
+          type: string
+          description: Alt text for the image.
+          example: "Survey header image"
+        properties:
+          $ref: '#/components/schemas/MediaProperties'
+        sourceUri:
+          type: string
+          description: The source URI for the image upload.
+
+    ImageItem:
+      type: object
+      description: A form item that displays an image.
+      properties:
+        image:
+          $ref: '#/components/schemas/Image'
+
+    VideoItem:
+      type: object
+      description: A form item that displays a video.
+      properties:
+        video:
+          $ref: '#/components/schemas/Video'
+        caption:
+          type: string
+          description: Caption displayed below the video.
+          example: "Product demo video"
+
+    Video:
+      type: object
+      description: A video in a form.
+      properties:
+        youtubeUri:
+          type: string
+          description: The YouTube URI of the video.
+          example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        properties:
+          $ref: '#/components/schemas/MediaProperties'
+
+    MediaProperties:
+      type: object
+      description: Properties of an image or video.
+      properties:
+        alignment:
+          type: string
+          description: The alignment of the media.
+          enum:
+            - ALIGNMENT_UNSPECIFIED
+            - LEFT
+            - RIGHT
+            - CENTER
+          example: "CENTER"
+        width:
+          type: integer
+          description: The width of the media in pixels.
+          example: 600
+
+    Grid:
+      type: object
+      description: A grid of questions sharing the same set of column choices.
+      properties:
+        columns:
+          $ref: '#/components/schemas/ChoiceQuestion'
+        shuffleQuestions:
+          type: boolean
+          description: Whether to randomize the order of rows.
+          example: false
+
+    FormResponse:
+      type: object
+      description: A response to a Google Form.
+      properties:
+        formId:
+          type: string
+          description: Output only. The form ID.
+          readOnly: true
+          example: "1BxiMVs0XRA5nFMdLXDSR2r9NphkU4V9qeeW0nQmGR8"
+        responseId:
+          type: string
+          description: Output only. The response ID.
+          readOnly: true
+          example: "ACYDBNhq7TU3h6Vk..."
+        createTime:
+          type: string
+          format: date-time
+          description: Output only. Timestamp for the first time the response was submitted.
+          readOnly: true
+          example: "2026-04-15T10:30:00Z"
+        lastSubmittedTime:
+          type: string
+          format: date-time
+          description: Output only. Timestamp for the most recent time the response was submitted.
+          readOnly: true
+          example: "2026-04-15T10:30:00Z"
+        respondentEmail:
+          type: string
+          format: email
+          description: Output only. The email address of the respondent if collected.
+          readOnly: true
+          example: "respondent@example.com"
+        answers:
+          type: object
+          description: Output only. The actual answers keyed by question ID.
+          additionalProperties:
+            $ref: '#/components/schemas/Answer'
+        totalScore:
+          type: number
+          description: Output only. Total points awarded for the submission on quiz forms.
+          readOnly: true
+          example: 85.0
+
+    Answer:
+      type: object
+      description: An answer to a question.
+      properties:
+        questionId:
+          type: string
+          description: Output only. The question's ID.
+          readOnly: true
+          example: "7e8f9a0b"
+        grade:
+          $ref: '#/components/schemas/Grade'
+        textAnswers:
+          $ref: '#/components/schemas/TextAnswers'
+        fileUploadAnswers:
+          $ref: '#/components/schemas/FileUploadAnswers'
+
+    Grade:
+      type: object
+      description: The grade for an answer on a quiz form.
+      properties:
+        score:
+          type: number
+          description: Output only. The numeric score awarded.
+          readOnly: true
+          example: 10.0
+        correct:
+          type: boolean
+          description: Output only. Whether the answer was correct.
+          readOnly: true
+          example: true
+        feedback:
+          $ref: '#/components/schemas/Feedback'
+
+    TextAnswers:
+      type: object
+      description: Text-based answers to a question.
+      properties:
+        answers:
+          type: array
+          description: Output only. The text answers.
+          items:
+            $ref: '#/components/schemas/TextAnswer'
+
+    TextAnswer:
+      type: object
+      description: A single text answer value.
+      properties:
+        value:
+          type: string
+          description: Output only. The answer value.
+          readOnly: true
+          example: "Very Satisfied"
+
+    FileUploadAnswers:
+      type: object
+      description: File upload answers to a question.
+      properties:
+        answers:
+          type: array
+          description: Output only. The file upload answers.
+          items:
+            $ref: '#/components/schemas/FileUploadAnswer'
+
+    FileUploadAnswer:
+      type: object
+      description: A single file upload answer.
+      properties:
+        fileId:
+          type: string
+          description: Output only. The Google Drive file ID.
+          readOnly: true
+          example: "1AbCdEfGhIjKlMnOp"
+        fileName:
+          type: string
+          description: Output only. The file name.
+          readOnly: true
+          example: "response-attachment.pdf"
+        mimeType:
+          type: string
+          description: Output only. The MIME type of the file.
+          readOnly: true
+          example: "application/pdf"
+
+    Watch:
+      type: object
+      description: A watch for receiving notifications about form changes or responses.
+      properties:
+        id:
+          type: string
+          description: Output only. The ID of this watch.
+          readOnly: true
+          example: "watch-abc123"
+        target:
+          $ref: '#/components/schemas/WatchTarget'
+        eventType:
+          type: string
+          description: Required. Which event type to watch for.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - SCHEMA
+            - RESPONSES
+          example: "RESPONSES"
+        createTime:
+          type: string
+          format: date-time
+          description: Output only. Timestamp of when this was created.
+          readOnly: true
+          example: "2026-04-15T10:00:00Z"
+        expireTime:
+          type: string
+          format: date-time
+          description: Output only. Timestamp for when this will expire.
+          readOnly: true
+          example: "2026-04-22T10:00:00Z"
+        errorType:
+          type: string
+          description: Output only. The most recent error type for an attempted delivery.
+          readOnly: true
+          enum:
+            - ERROR_TYPE_UNSPECIFIED
+            - PROJECT_NOT_AUTHORIZED
+            - NO_USER_ACCESS
+            - OTHER_ERRORS
+        state:
+          type: string
+          description: Output only. The current state of the watch.
+          readOnly: true
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - SUSPENDED
+          example: "ACTIVE"
+
+    WatchTarget:
+      type: object
+      description: The target for watch notifications.
+      properties:
+        topic:
+          $ref: '#/components/schemas/CloudPubsubTopic'
+
+    CloudPubsubTopic:
+      type: object
+      description: A Cloud Pub/Sub topic for receiving notifications.
+      properties:
+        topicName:
+          type: string
+          description: Required. A fully qualified Pub/Sub topic name to publish to.
+          example: "projects/my-project/topics/forms-notifications"
+
+    CreateWatchRequest:
+      type: object
+      description: Request to create a new watch.
+      properties:
+        watch:
+          $ref: '#/components/schemas/Watch'
+
+    BatchUpdateFormRequest:
+      type: object
+      description: Request to batch update a form.
+      properties:
+        includeFormInResponse:
+          type: boolean
+          description: Whether to include the updated form in the response.
+          example: true
+        requests:
+          type: array
+          description: The list of update requests to apply.
+          items:
+            $ref: '#/components/schemas/Request'
+        writeControl:
+          $ref: '#/components/schemas/WriteControl'
+
+    BatchUpdateFormResponse:
+      type: object
+      description: Response from a batch update operation.
+      properties:
+        form:
+          $ref: '#/components/schemas/Form'
+        replies:
+          type: array
+          description: The replies from each request in the batch.
+          items:
+            $ref: '#/components/schemas/Response'
+        writeControl:
+          $ref: '#/components/schemas/WriteControl'
+
+    Request:
+      type: object
+      description: A single update request in a batch.
+      properties:
+        updateFormInfo:
+          $ref: '#/components/schemas/UpdateFormInfoRequest'
+        updateSettings:
+          $ref: '#/components/schemas/UpdateSettingsRequest'
+        createItem:
+          $ref: '#/components/schemas/CreateItemRequest'
+        moveItem:
+          $ref: '#/components/schemas/MoveItemRequest'
+        deleteItem:
+          $ref: '#/components/schemas/DeleteItemRequest'
+        updateItem:
+          $ref: '#/components/schemas/UpdateItemRequest'
+
+    Response:
+      type: object
+      description: A single response from a batch update request.
+      properties:
+        createItem:
+          $ref: '#/components/schemas/CreateItemResponse'
+
+    WriteControl:
+      type: object
+      description: Provides control over write operations to prevent concurrent modifications.
+      properties:
+        requiredRevisionId:
+          type: string
+          description: The revision ID of the form that the request is based on.
+          example: "00000042"
+        targetRevisionId:
+          type: string
+          description: Output only. The target revision ID of the form.
+          readOnly: true
+
+    UpdateFormInfoRequest:
+      type: object
+      description: Request to update form info fields.
+      properties:
+        info:
+          $ref: '#/components/schemas/Info'
+        updateMask:
+          type: string
+          description: Fields to update specified as a comma-separated list.
+          example: "title,description"
+
+    UpdateSettingsRequest:
+      type: object
+      description: Request to update form settings.
+      properties:
+        settings:
+          $ref: '#/components/schemas/FormSettings'
+        updateMask:
+          type: string
+          description: Fields to update.
+          example: "quizSettings.isQuiz"
+
+    CreateItemRequest:
+      type: object
+      description: Request to create a new item.
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        location:
+          $ref: '#/components/schemas/Location'
+
+    CreateItemResponse:
+      type: object
+      description: Response from creating an item.
+      properties:
+        itemId:
+          type: string
+          description: The ID of the created item.
+          example: "4a5b6c7d"
+        questionId:
+          type: array
+          description: The IDs of created questions within the item.
+          items:
+            type: string
+
+    MoveItemRequest:
+      type: object
+      description: Request to move an item to a different position.
+      properties:
+        originalLocation:
+          $ref: '#/components/schemas/Location'
+        newLocation:
+          $ref: '#/components/schemas/Location'
+
+    DeleteItemRequest:
+      type: object
+      description: Request to delete an item.
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+
+    UpdateItemRequest:
+      type: object
+      description: Request to update an existing item.
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        location:
+          $ref: '#/components/schemas/Location'
+        updateMask:
+          type: string
+          description: Fields to update.
+          example: "title,questionItem.question.required"
+
+    Location:
+      type: object
+      description: A specific location in a form.
+      properties:
+        index:
+          type: integer
+          description: The index of an item in the form.
+          example: 0
+
+    SetPublishSettingsRequest:
+      type: object
+      description: Request to set publish settings for a form.
+      properties:
+        publishSettings:
+          $ref: '#/components/schemas/PublishSettings'
+
+    ListFormResponsesResponse:
+      type: object
+      description: Response from listing form responses.
+      properties:
+        responses:
+          type: array
+          description: The list of form responses.
+          items:
+            $ref: '#/components/schemas/FormResponse'
+        nextPageToken:
+          type: string
+          description: Token for retrieving the next page of responses.
+          example: "CiAKGjBpNDd2..."
+
+    ListWatchesResponse:
+      type: object
+      description: Response from listing watches.
+      properties:
+        watches:
+          type: array
+          description: The list of watches.
+          items:
+            $ref: '#/components/schemas/Watch'
+
+    Error:
+      type: object
+      description: An error response from the API.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code.
+              example: 404
+            message:
+              type: string
+              description: A human-readable error message.
+              example: "Requested entity was not found."
+            status:
+              type: string
+              description: The error status code.
+              example: "NOT_FOUND"
