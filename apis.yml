@@ -157,6 +157,8 @@ apis:
   - type: Authentication
     url: https://developers.google.com/forms/api/guides/auth
 common:
+  - type: Overlay
+    url: overlays/google-forms-api-overlay.yaml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/google-forms/overview
   - type: AgenticAccess
