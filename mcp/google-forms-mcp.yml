@@ -2,13 +2,11 @@ generated: '2026-06-20'
 method: derived
 status: candidate
 source: openapi/google-forms-api.yaml
-notes: >-
-  Google publishes no first-party hosted/remote MCP server for the Forms API.
-  Several community MCP servers wrap it (e.g. github.com/matteoantoci/google-forms-mcp,
-  github.com/HosakaKeigo/mcp-server-google-forms, and multi-product Google
-  Workspace servers such as github.com/taylorwilsdon/google_workspace_mcp) but
-  none are officially maintained by Google. The tool list below is a CANDIDATE
-  derived one-to-one from the OpenAPI operations.
+notes: Google publishes no first-party hosted/remote MCP server for the Forms API. Several community MCP
+  servers wrap it (e.g. github.com/matteoantoci/google-forms-mcp, github.com/HosakaKeigo/mcp-server-google-forms,
+  and multi-product Google Workspace servers such as github.com/taylorwilsdon/google_workspace_mcp) but
+  none are officially maintained by Google. The tool list below is a CANDIDATE derived one-to-one from
+  the OpenAPI operations.
 community_servers:
 - name: matteoantoci/google-forms-mcp
   url: https://github.com/matteoantoci/google-forms-mcp
@@ -50,3 +48,9 @@ tools:
 - name: renew_watch
   description: Renew an existing watch for seven days from the current time.
   source_operation: openapi/google-forms-api.yaml#renewWatch
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census

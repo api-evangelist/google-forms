@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Forms Responses API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Forms List Form Responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.googleapis.com/v1/forms/:formId/responses",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form whose responses to list."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter for responses using timestamp comparison."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of responses to return."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Page token returned from a previous list call."
+              }
+            ]
+          },
+          "docs": "List a form's responses with optional filtering by timestamp."
+        },
+        {
+          "info": {
+            "name": "Google Forms Get Form Response",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.googleapis.com/v1/forms/:formId/responses/:responseId",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form."
+              },
+              {
+                "name": "responseId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the response to retrieve."
+              }
+            ]
+          },
+          "docs": "Get one response from the form by its response ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

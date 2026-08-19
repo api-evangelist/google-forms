@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Forms API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Forms Create Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.googleapis.com/v1/forms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new form using the title given in the provided form message in the request body."
+        },
+        {
+          "info": {
+            "name": "Google Forms Get Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.googleapis.com/v1/forms/:formId",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form to retrieve."
+              }
+            ]
+          },
+          "docs": "Get a form by its ID including the form structure, items, and settings."
+        },
+        {
+          "info": {
+            "name": "Google Forms Batch Update Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.googleapis.com/v1/forms/:formId:batchUpdate",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the form with a batch of updates including adding, removing, or modifying items and settings."
+        },
+        {
+          "info": {
+            "name": "Google Forms Set Publish Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.googleapis.com/v1/forms/:formId:setPublishSettings",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form to update publish settings for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the publish settings of a form including whether the form is published and accepting responses."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

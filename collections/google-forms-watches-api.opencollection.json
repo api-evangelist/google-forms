@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Forms Watches API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Watches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Forms List Watches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.googleapis.com/v1/forms/:formId/watches",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form whose watches to list."
+              }
+            ]
+          },
+          "docs": "Return a list of the watches owned by the invoking project for the specified form."
+        },
+        {
+          "info": {
+            "name": "Google Forms Create Watch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.googleapis.com/v1/forms/:formId/watches",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form to watch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new watch to receive notifications about form changes or new responses via Cloud Pub/Sub."
+        },
+        {
+          "info": {
+            "name": "Google Forms Delete Watch",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://forms.googleapis.com/v1/forms/:formId/watches/:watchId",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form."
+              },
+              {
+                "name": "watchId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the watch to delete."
+              }
+            ]
+          },
+          "docs": "Delete a watch and stop receiving notifications."
+        },
+        {
+          "info": {
+            "name": "Google Forms Renew Watch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.googleapis.com/v1/forms/:formId/watches/:watchId:renew",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the form."
+              },
+              {
+                "name": "watchId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the watch to renew."
+              }
+            ]
+          },
+          "docs": "Renew an existing watch for seven days from the current time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
