@@ -12,8 +12,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleFormsApi
-  url: ../openapi/google-forms-api.yaml
+- name: formsApi
+  url: ../openapi/google-forms-forms-api-openapi.yml
+  type: openapi
+- name: responsesApi
+  url: ../openapi/google-forms-responses-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: close-form-and-export

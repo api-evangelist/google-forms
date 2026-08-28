@@ -13,8 +13,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleFormsApi
-  url: ../openapi/google-forms-api.yaml
+- name: watchesApi
+  url: ../openapi/google-forms-watches-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: renew-expiring-watch

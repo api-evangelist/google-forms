@@ -13,8 +13,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleFormsApi
-  url: ../openapi/google-forms-api.yaml
+- name: formsApi
+  url: ../openapi/google-forms-forms-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-and-publish-form
