@@ -4,6 +4,18 @@ description: The Google Forms API is a RESTful interface that lets you create an
   form responses, set up watches for notifications on form changes and new responses, and integrate forms with external applications.
 url: https://developers.google.com/forms/api
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
