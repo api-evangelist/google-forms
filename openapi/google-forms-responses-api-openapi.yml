@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Google Forms Responses API
   description: The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, and set up watches for notifications on form changes and new responses.
@@ -119,18 +119,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TextLink:
+    Answer:
       type: object
-      description: A text link.
+      description: An answer to a question.
       properties:
-        uri:
+        questionId:
           type: string
-          description: The URI to link to.
-          example: https://example.com/learn-more
-        displayText:
-          type: string
-          description: The text to display for the link.
-          example: Learn More
+          description: Output only. The question's ID.
+          readOnly: true
+          example: 7e8f9a0b
+        grade:
+          $ref: '#/components/schemas/Grade'
+        textAnswers:
+          $ref: '#/components/schemas/TextAnswers'
+        fileUploadAnswers:
+          $ref: '#/components/schemas/FileUploadAnswers'
     FileUploadAnswers:
       type: object
       description: File upload answers to a question.
@@ -140,54 +143,6 @@ components:
           description: Output only. The file upload answers.
           items:
             $ref: '#/components/schemas/FileUploadAnswer'
-    FileUploadAnswer:
-      type: object
-      description: A single file upload answer.
-      properties:
-        fileId:
-          type: string
-          description: Output only. The Google Drive file ID.
-          readOnly: true
-          example: 1AbCdEfGhIjKlMnOp
-        fileName:
-          type: string
-          description: Output only. The file name.
-          readOnly: true
-          example: response-attachment.pdf
-        mimeType:
-          type: string
-          description: Output only. The MIME type of the file.
-          readOnly: true
-          example: application/pdf
-    ExtraMaterial:
-      type: object
-      description: Extra material that can be shown as feedback.
-      properties:
-        link:
-          $ref: '#/components/schemas/TextLink'
-        video:
-          $ref: '#/components/schemas/VideoLink'
-    VideoLink:
-      type: object
-      description: A video link.
-      properties:
-        displayText:
-          type: string
-          description: The text to display for the video.
-          example: Watch Tutorial
-        youtubeUri:
-          type: string
-          description: The YouTube URI of the video.
-          example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-    TextAnswers:
-      type: object
-      description: Text-based answers to a question.
-      properties:
-        answers:
-          type: array
-          description: Output only. The text answers.
-          items:
-            $ref: '#/components/schemas/TextAnswer'
     Error:
       type: object
       description: An error response from the API.
@@ -207,44 +162,25 @@ components:
               type: string
               description: The error status code.
               example: NOT_FOUND
-    TextAnswer:
+    FileUploadAnswer:
       type: object
-      description: A single text answer value.
+      description: A single file upload answer.
       properties:
-        value:
+        fileId:
           type: string
-          description: Output only. The answer value.
+          description: Output only. The Google Drive file ID.
           readOnly: true
-          example: Very Satisfied
-    Grade:
-      type: object
-      description: The grade for an answer on a quiz form.
-      properties:
-        score:
-          type: number
-          description: Output only. The numeric score awarded.
-          readOnly: true
-          example: 10.0
-        correct:
-          type: boolean
-          description: Output only. Whether the answer was correct.
-          readOnly: true
-          example: true
-        feedback:
-          $ref: '#/components/schemas/Feedback'
-    Feedback:
-      type: object
-      description: Feedback shown after answering a quiz question.
-      properties:
-        text:
+          example: 1AbCdEfGhIjKlMnOp
+        fileName:
           type: string
-          description: The feedback text.
-          example: Great job!
-        material:
-          type: array
-          description: Additional material shown with feedback.
-          items:
-            $ref: '#/components/schemas/ExtraMaterial'
+          description: Output only. The file name.
+          readOnly: true
+          example: response-attachment.pdf
+        mimeType:
+          type: string
+          description: Output only. The MIME type of the file.
+          readOnly: true
+          example: application/pdf
     ListFormResponsesResponse:
       type: object
       description: Response from listing form responses.
@@ -258,21 +194,23 @@ components:
           type: string
           description: Token for retrieving the next page of responses.
           example: CiAKGjBpNDd2...
-    Answer:
+    TextAnswers:
       type: object
-      description: An answer to a question.
+      description: Text-based answers to a question.
       properties:
-        questionId:
-          type: string
-          description: Output only. The question's ID.
-          readOnly: true
-          example: 7e8f9a0b
-        grade:
-          $ref: '#/components/schemas/Grade'
-        textAnswers:
-          $ref: '#/components/schemas/TextAnswers'
-        fileUploadAnswers:
-          $ref: '#/components/schemas/FileUploadAnswers'
+        answers:
+          type: array
+          description: Output only. The text answers.
+          items:
+            $ref: '#/components/schemas/TextAnswer'
+    ExtraMaterial:
+      type: object
+      description: Extra material that can be shown as feedback.
+      properties:
+        link:
+          $ref: '#/components/schemas/TextLink'
+        video:
+          $ref: '#/components/schemas/VideoLink'
     FormResponse:
       type: object
       description: A response to a Google Form.
@@ -315,6 +253,68 @@ components:
           description: Output only. Total points awarded for the submission on quiz forms.
           readOnly: true
           example: 85.0
+    TextAnswer:
+      type: object
+      description: A single text answer value.
+      properties:
+        value:
+          type: string
+          description: Output only. The answer value.
+          readOnly: true
+          example: Very Satisfied
+    Grade:
+      type: object
+      description: The grade for an answer on a quiz form.
+      properties:
+        score:
+          type: number
+          description: Output only. The numeric score awarded.
+          readOnly: true
+          example: 10.0
+        correct:
+          type: boolean
+          description: Output only. Whether the answer was correct.
+          readOnly: true
+          example: true
+        feedback:
+          $ref: '#/components/schemas/Feedback'
+    VideoLink:
+      type: object
+      description: A video link.
+      properties:
+        displayText:
+          type: string
+          description: The text to display for the video.
+          example: Watch Tutorial
+        youtubeUri:
+          type: string
+          description: The YouTube URI of the video.
+          example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    TextLink:
+      type: object
+      description: A text link.
+      properties:
+        uri:
+          type: string
+          description: The URI to link to.
+          example: https://example.com/learn-more
+        displayText:
+          type: string
+          description: The text to display for the link.
+          example: Learn More
+    Feedback:
+      type: object
+      description: Feedback shown after answering a quiz question.
+      properties:
+        text:
+          type: string
+          description: The feedback text.
+          example: Great job!
+        material:
+          type: array
+          description: Additional material shown with feedback.
+          items:
+            $ref: '#/components/schemas/ExtraMaterial'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Google Forms Watches API
   description: The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, and set up watches for notifications on form changes and new responses.
@@ -185,12 +185,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateWatchRequest:
+    WatchTarget:
       type: object
-      description: Request to create a new watch.
+      description: The target for watch notifications.
       properties:
-        watch:
-          $ref: '#/components/schemas/Watch'
+        topic:
+          $ref: '#/components/schemas/CloudPubsubTopic'
     Watch:
       type: object
       description: A watch for receiving notifications about form changes or responses.
@@ -240,6 +240,20 @@ components:
           - ACTIVE
           - SUSPENDED
           example: ACTIVE
+    CloudPubsubTopic:
+      type: object
+      description: A Cloud Pub/Sub topic for receiving notifications.
+      properties:
+        topicName:
+          type: string
+          description: Required. A fully qualified Pub/Sub topic name to publish to.
+          example: projects/my-project/topics/forms-notifications
+    CreateWatchRequest:
+      type: object
+      description: Request to create a new watch.
+      properties:
+        watch:
+          $ref: '#/components/schemas/Watch'
     Error:
       type: object
       description: An error response from the API.
@@ -268,20 +282,6 @@ components:
           description: The list of watches.
           items:
             $ref: '#/components/schemas/Watch'
-    CloudPubsubTopic:
-      type: object
-      description: A Cloud Pub/Sub topic for receiving notifications.
-      properties:
-        topicName:
-          type: string
-          description: Required. A fully qualified Pub/Sub topic name to publish to.
-          example: projects/my-project/topics/forms-notifications
-    WatchTarget:
-      type: object
-      description: The target for watch notifications.
-      properties:
-        topic:
-          $ref: '#/components/schemas/CloudPubsubTopic'
   securitySchemes:
     oauth2:
       type: oauth2
