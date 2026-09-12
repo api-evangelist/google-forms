@@ -169,6 +169,8 @@ apis:
   - type: Authentication
     url: https://developers.google.com/forms/api/guides/auth
 common:
+  - type: Website
+    url: https://www.google.com/
   - type: Overlay
     url: overlays/google-forms-api-overlay.yaml
   - type: PostmanWorkspace
@@ -295,3 +297,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-parent: google
+x-relationship: product
