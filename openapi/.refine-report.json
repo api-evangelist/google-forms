@@ -1,9 +1,7 @@
 {
   "provider": "google-forms",
   "sources": [
-    "google-forms-forms-api-openapi.yml",
-    "google-forms-responses-api-openapi.yml",
-    "google-forms-watches-api-openapi.yml"
+    "_ae-authored/google-forms-api.yaml"
   ],
   "outputs": [
     "google-forms-forms-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "google-forms-forms-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "google-forms-responses-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "google-forms-watches-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "google-forms-api.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "google-forms-forms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-forms-responses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-forms-watches-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

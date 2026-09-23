@@ -119,6 +119,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    VideoLink:
+      type: object
+      description: A video link.
+      properties:
+        displayText:
+          type: string
+          description: The text to display for the video.
+          example: Watch Tutorial
+        youtubeUri:
+          type: string
+          description: The YouTube URI of the video.
+          example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
     Answer:
       type: object
       description: An answer to a question.
@@ -134,34 +146,31 @@ components:
           $ref: '#/components/schemas/TextAnswers'
         fileUploadAnswers:
           $ref: '#/components/schemas/FileUploadAnswers'
-    FileUploadAnswers:
+    TextLink:
       type: object
-      description: File upload answers to a question.
+      description: A text link.
       properties:
-        answers:
+        uri:
+          type: string
+          description: The URI to link to.
+          example: https://example.com/learn-more
+        displayText:
+          type: string
+          description: The text to display for the link.
+          example: Learn More
+    ListFormResponsesResponse:
+      type: object
+      description: Response from listing form responses.
+      properties:
+        responses:
           type: array
-          description: Output only. The file upload answers.
+          description: The list of form responses.
           items:
-            $ref: '#/components/schemas/FileUploadAnswer'
-    Error:
-      type: object
-      description: An error response from the API.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code.
-              example: 404
-            message:
-              type: string
-              description: A human-readable error message.
-              example: Requested entity was not found.
-            status:
-              type: string
-              description: The error status code.
-              example: NOT_FOUND
+            $ref: '#/components/schemas/FormResponse'
+        nextPageToken:
+          type: string
+          description: Token for retrieving the next page of responses.
+          example: CiAKGjBpNDd2...
     FileUploadAnswer:
       type: object
       description: A single file upload answer.
@@ -181,19 +190,33 @@ components:
           description: Output only. The MIME type of the file.
           readOnly: true
           example: application/pdf
-    ListFormResponsesResponse:
+    Error:
       type: object
-      description: Response from listing form responses.
+      description: An error response from the API.
       properties:
-        responses:
-          type: array
-          description: The list of form responses.
-          items:
-            $ref: '#/components/schemas/FormResponse'
-        nextPageToken:
-          type: string
-          description: Token for retrieving the next page of responses.
-          example: CiAKGjBpNDd2...
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code.
+              example: 404
+            message:
+              type: string
+              description: A human-readable error message.
+              example: Requested entity was not found.
+            status:
+              type: string
+              description: The error status code.
+              example: NOT_FOUND
+    ExtraMaterial:
+      type: object
+      description: Extra material that can be shown as feedback.
+      properties:
+        link:
+          $ref: '#/components/schemas/TextLink'
+        video:
+          $ref: '#/components/schemas/VideoLink'
     TextAnswers:
       type: object
       description: Text-based answers to a question.
@@ -203,14 +226,44 @@ components:
           description: Output only. The text answers.
           items:
             $ref: '#/components/schemas/TextAnswer'
-    ExtraMaterial:
+    Feedback:
       type: object
-      description: Extra material that can be shown as feedback.
+      description: Feedback shown after answering a quiz question.
       properties:
-        link:
-          $ref: '#/components/schemas/TextLink'
-        video:
-          $ref: '#/components/schemas/VideoLink'
+        text:
+          type: string
+          description: The feedback text.
+          example: Great job!
+        material:
+          type: array
+          description: Additional material shown with feedback.
+          items:
+            $ref: '#/components/schemas/ExtraMaterial'
+    Grade:
+      type: object
+      description: The grade for an answer on a quiz form.
+      properties:
+        score:
+          type: number
+          description: Output only. The numeric score awarded.
+          readOnly: true
+          example: 10.0
+        correct:
+          type: boolean
+          description: Output only. Whether the answer was correct.
+          readOnly: true
+          example: true
+        feedback:
+          $ref: '#/components/schemas/Feedback'
+    TextAnswer:
+      type: object
+      description: A single text answer value.
+      properties:
+        value:
+          type: string
+          description: Output only. The answer value.
+          readOnly: true
+          example: Very Satisfied
     FormResponse:
       type: object
       description: A response to a Google Form.
@@ -253,68 +306,15 @@ components:
           description: Output only. Total points awarded for the submission on quiz forms.
           readOnly: true
           example: 85.0
-    TextAnswer:
+    FileUploadAnswers:
       type: object
-      description: A single text answer value.
+      description: File upload answers to a question.
       properties:
-        value:
-          type: string
-          description: Output only. The answer value.
-          readOnly: true
-          example: Very Satisfied
-    Grade:
-      type: object
-      description: The grade for an answer on a quiz form.
-      properties:
-        score:
-          type: number
-          description: Output only. The numeric score awarded.
-          readOnly: true
-          example: 10.0
-        correct:
-          type: boolean
-          description: Output only. Whether the answer was correct.
-          readOnly: true
-          example: true
-        feedback:
-          $ref: '#/components/schemas/Feedback'
-    VideoLink:
-      type: object
-      description: A video link.
-      properties:
-        displayText:
-          type: string
-          description: The text to display for the video.
-          example: Watch Tutorial
-        youtubeUri:
-          type: string
-          description: The YouTube URI of the video.
-          example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-    TextLink:
-      type: object
-      description: A text link.
-      properties:
-        uri:
-          type: string
-          description: The URI to link to.
-          example: https://example.com/learn-more
-        displayText:
-          type: string
-          description: The text to display for the link.
-          example: Learn More
-    Feedback:
-      type: object
-      description: Feedback shown after answering a quiz question.
-      properties:
-        text:
-          type: string
-          description: The feedback text.
-          example: Great job!
-        material:
+        answers:
           type: array
-          description: Additional material shown with feedback.
+          description: Output only. The file upload answers.
           items:
-            $ref: '#/components/schemas/ExtraMaterial'
+            $ref: '#/components/schemas/FileUploadAnswer'
   securitySchemes:
     oauth2:
       type: oauth2
