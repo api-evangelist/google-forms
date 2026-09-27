@@ -185,6 +185,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    WatchTarget:
+      type: object
+      description: The target for watch notifications.
+      properties:
+        topic:
+          $ref: '#/components/schemas/CloudPubsubTopic'
     ListWatchesResponse:
       type: object
       description: Response from listing watches.
@@ -200,6 +206,14 @@ components:
       properties:
         watch:
           $ref: '#/components/schemas/Watch'
+    CloudPubsubTopic:
+      type: object
+      description: A Cloud Pub/Sub topic for receiving notifications.
+      properties:
+        topicName:
+          type: string
+          description: Required. A fully qualified Pub/Sub topic name to publish to.
+          example: projects/my-project/topics/forms-notifications
     Error:
       type: object
       description: An error response from the API.
@@ -268,20 +282,6 @@ components:
           - ACTIVE
           - SUSPENDED
           example: ACTIVE
-    CloudPubsubTopic:
-      type: object
-      description: A Cloud Pub/Sub topic for receiving notifications.
-      properties:
-        topicName:
-          type: string
-          description: Required. A fully qualified Pub/Sub topic name to publish to.
-          example: projects/my-project/topics/forms-notifications
-    WatchTarget:
-      type: object
-      description: The target for watch notifications.
-      properties:
-        topic:
-          $ref: '#/components/schemas/CloudPubsubTopic'
   securitySchemes:
     oauth2:
       type: oauth2
