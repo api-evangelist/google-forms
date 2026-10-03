@@ -185,12 +185,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    WatchTarget:
-      type: object
-      description: The target for watch notifications.
-      properties:
-        topic:
-          $ref: '#/components/schemas/CloudPubsubTopic'
     ListWatchesResponse:
       type: object
       description: Response from listing watches.
@@ -200,39 +194,6 @@ components:
           description: The list of watches.
           items:
             $ref: '#/components/schemas/Watch'
-    CreateWatchRequest:
-      type: object
-      description: Request to create a new watch.
-      properties:
-        watch:
-          $ref: '#/components/schemas/Watch'
-    CloudPubsubTopic:
-      type: object
-      description: A Cloud Pub/Sub topic for receiving notifications.
-      properties:
-        topicName:
-          type: string
-          description: Required. A fully qualified Pub/Sub topic name to publish to.
-          example: projects/my-project/topics/forms-notifications
-    Error:
-      type: object
-      description: An error response from the API.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code.
-              example: 404
-            message:
-              type: string
-              description: A human-readable error message.
-              example: Requested entity was not found.
-            status:
-              type: string
-              description: The error status code.
-              example: NOT_FOUND
     Watch:
       type: object
       description: A watch for receiving notifications about form changes or responses.
@@ -282,6 +243,45 @@ components:
           - ACTIVE
           - SUSPENDED
           example: ACTIVE
+    Error:
+      type: object
+      description: An error response from the API.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code.
+              example: 404
+            message:
+              type: string
+              description: A human-readable error message.
+              example: Requested entity was not found.
+            status:
+              type: string
+              description: The error status code.
+              example: NOT_FOUND
+    WatchTarget:
+      type: object
+      description: The target for watch notifications.
+      properties:
+        topic:
+          $ref: '#/components/schemas/CloudPubsubTopic'
+    CreateWatchRequest:
+      type: object
+      description: Request to create a new watch.
+      properties:
+        watch:
+          $ref: '#/components/schemas/Watch'
+    CloudPubsubTopic:
+      type: object
+      description: A Cloud Pub/Sub topic for receiving notifications.
+      properties:
+        topicName:
+          type: string
+          description: Required. A fully qualified Pub/Sub topic name to publish to.
+          example: projects/my-project/topics/forms-notifications
   securitySchemes:
     oauth2:
       type: oauth2
