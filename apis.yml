@@ -178,6 +178,10 @@ apis:
   - type: Authentication
     url: https://developers.google.com/forms/api/guides/auth
 common:
+- type: Plans
+  url: plans/google-forms-plans-pricing.yml
+- type: FinOps
+  url: finops/google-forms-finops.yml
 - type: Website
   url: https://www.google.com/
 - type: Overlay
