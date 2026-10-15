@@ -403,7 +403,7 @@
     builder: unknown (not in the directory record)
     other_apps:
     - google-forms-legacy
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: google-forms-pipedream
   label: Pipedream
@@ -429,5 +429,5 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
