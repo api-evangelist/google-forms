@@ -218,7 +218,6 @@
   arazzo: null
 - slug: google-forms-monday-com
   label: monday.com
-  partner: monday-com
   partner_name: monday.com
   category: Project Management
   type: marketplace
@@ -226,7 +225,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/google-forms/integrations/monday
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: google-forms-whatsapp-notifications
   label: WhatsApp Notifications
@@ -370,7 +369,6 @@
   arazzo: null
 - slug: google-forms-microsoft-excel
   label: Microsoft Excel
-  partner: microsoft-excel
   partner_name: Microsoft Excel
   category: Microsoft
   type: marketplace
@@ -378,5 +376,58 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/google-forms/integrations/excel
   source: edge
+  status: pending-partner-spec
+  arazzo: null
+- slug: google-forms-zapier
+  label: Zapier
+  partner: zapier
+  partner_name: Zapier
+  type: marketplace
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  evidence: https://zapier.com/apps/google-forms/integrations
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: Google Forms
+    matched_domain: google.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: google-forms
+    beta: false
+    builder: unknown (not in the directory record)
+    other_apps:
+    - google-forms-legacy
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-pipedream
+  label: Pipedream
+  partner: pipedream
+  partner_name: Pipedream
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/google_forms
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: google forms
+    matched_domain: google.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: google_forms
+    actions: true
+    sources: true
+    builder: Pipedream repo (component)
   status: pending-generation
   arazzo: null
