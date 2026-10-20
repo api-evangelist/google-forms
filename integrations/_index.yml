@@ -15,6 +15,7 @@
   evidence: https://zapier.com/apps/gmail/integrations/google-forms/11008/send-email-via-gmail-for-new-google-forms-submissions
   template: https://zapier.com/apps/gmail/integrations/google-forms/11008/send-email-via-gmail-for-new-google-forms-submissions
   source: template
+  relationship: ipaas-bridge
   status: pending-partner-spec
   arazzo: null
 - slug: google-forms-share-google-forms-responses-in-a-slack-channel
@@ -29,6 +30,7 @@
   evidence: https://zapier.com/apps/google-forms/integrations/slack/11018/share-google-forms-responses-in-a-slack-channel
   template: https://zapier.com/apps/google-forms/integrations/slack/11018/share-google-forms-responses-in-a-slack-channel
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-create-trello-cards-from-new-google-forms-responses
@@ -43,6 +45,7 @@
   evidence: https://zapier.com/apps/google-forms/integrations/trello/11016/create-trello-cards-from-new-google-forms-responses
   template: https://zapier.com/apps/google-forms/integrations/trello/11016/create-trello-cards-from-new-google-forms-responses
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-create-google-calendar-events-from-new-google-forms-submissions
@@ -57,6 +60,7 @@
   evidence: https://zapier.com/apps/google-calendar/integrations/google-forms/11015/create-google-calendar-events-from-new-google-forms-submissions
   template: https://zapier.com/apps/google-calendar/integrations/google-forms/11015/create-google-calendar-events-from-new-google-forms-submissions
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-create-trainerize-clients-from-new-google-forms-responses
@@ -71,6 +75,7 @@
   evidence: https://zapier.com/apps/abc-trainerize/integrations/google-forms/17829/create-trainerize-clients-from-new-google-forms-responses
   template: https://zapier.com/apps/abc-trainerize/integrations/google-forms/17829/create-trainerize-clients-from-new-google-forms-responses
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-send-new-google-forms-responses-to-notion-databases
@@ -85,10 +90,12 @@
   evidence: https://zapier.com/apps/google-forms/integrations/notion/597593/send-new-google-forms-responses-to-notion-databases
   template: https://zapier.com/apps/google-forms/integrations/notion/597593/send-new-google-forms-responses-to-notion-databases
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-send-prompts-to-chatgpt-for-google-forms-responses-and-add-the-chatgpt-respon
   label: Send prompts to ChatGPT for Google Forms responses and add the ChatGPT response to a Google Sheet
+  partner: openai
   partner_name: ChatGPT (OpenAI)
   category: AI Assistants
   use_case: Send prompts to ChatGPT for Google Forms responses and add the ChatGPT response to a Google Sheet
@@ -98,7 +105,8 @@
   evidence: https://zapier.com/apps/google-forms/integrations/google-sheets/255609446/send-prompts-to-chatgpt-for-google-forms-responses-and-add-the-chatgpt-response-to-a-google-sheet
   template: https://zapier.com/apps/google-forms/integrations/google-sheets/255609446/send-prompts-to-chatgpt-for-google-forms-responses-and-add-the-chatgpt-response-to-a-google-sheet
   source: template
-  status: pending-partner-spec
+  relationship: ipaas-bridge
+  status: pending-generation
   arazzo: null
 - slug: google-forms-create-clickup-tasks-for-new-google-forms-responses
   label: Create ClickUp tasks for new Google Forms responses
@@ -112,6 +120,7 @@
   evidence: https://zapier.com/apps/clickup/integrations/google-forms/20060/create-clickup-tasks-for-new-google-forms-responses
   template: https://zapier.com/apps/clickup/integrations/google-forms/20060/create-clickup-tasks-for-new-google-forms-responses
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-send-discord-messages-with-new-google-forms-responses
@@ -126,6 +135,7 @@
   evidence: https://zapier.com/apps/discord/integrations/google-forms/60533/send-discord-messages-with-new-google-forms-responses
   template: https://zapier.com/apps/discord/integrations/google-forms/60533/send-discord-messages-with-new-google-forms-responses
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-create-or-update-mailchimp-subscribers-from-new-google-forms-submissions
@@ -140,6 +150,7 @@
   evidence: https://zapier.com/apps/google-forms/integrations/mailchimp/11009/create-or-update-mailchimp-subscribers-from-new-google-forms-submissions
   template: https://zapier.com/apps/google-forms/integrations/mailchimp/11009/create-or-update-mailchimp-subscribers-from-new-google-forms-submissions
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: google-forms-create-asana-tasks-from-new-google-forms-responses
@@ -154,229 +165,8 @@
   evidence: https://zapier.com/apps/asana/integrations/google-forms/11035/create-asana-tasks-from-new-google-forms-responses
   template: https://zapier.com/apps/asana/integrations/google-forms/11035/create-asana-tasks-from-new-google-forms-responses
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
-  arazzo: null
-- slug: google-forms-google-docs
-  label: Google Docs
-  partner: google-docs
-  partner_name: Google Docs
-  category: Documents
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/google-docs
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-google-sheets
-  label: Google Sheets
-  partner: google-sheets
-  partner_name: Google Sheets
-  category: Google
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/google-sheets
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-hubspot
-  label: HubSpot
-  partner: hubspot
-  partner_name: HubSpot
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/hubspot
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-google-drive
-  label: Google Drive
-  partner: google-drive
-  partner_name: Google Drive
-  category: File Management & Storage
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/google-drive
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-airtable
-  label: Airtable
-  partner: airtable
-  partner_name: Airtable
-  category: Databases
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/airtable
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-monday-com
-  label: monday.com
-  partner_name: monday.com
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/monday
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: google-forms-whatsapp-notifications
-  label: WhatsApp Notifications
-  partner_name: WhatsApp Notifications
-  category: Communication
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/whatsapp-notifications
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: google-forms-jira-software-cloud
-  label: Jira Software Cloud
-  partner_name: Jira Software Cloud
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/jira-software-cloud
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: google-forms-microsoft-outlook
-  label: Microsoft Outlook
-  partner: microsoft-outlook
-  partner_name: Microsoft Outlook
-  category: Calendar
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/microsoft-outlook
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-follow-up-boss
-  label: Follow Up Boss
-  partner: follow-up-boss
-  partner_name: Follow Up Boss
-  category: CRM (Customer Relationship Management)
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/follow-up-boss
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-pipedrive
-  label: Pipedrive
-  partner: pipedrive
-  partner_name: Pipedrive
-  category: CRM (Customer Relationship Management)
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/pipedrive
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-activecampaign
-  label: ActiveCampaign
-  partner: activecampaign
-  partner_name: ActiveCampaign
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/activecampaign
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-google-slides
-  label: Google Slides
-  partner: google-slides
-  partner_name: Google Slides
-  category: Documents
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/google-slides
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-google-ai-studio-gemini
-  label: Google AI Studio (Gemini)
-  partner_name: Google AI Studio (Gemini)
-  category: AI Models
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/google-ai-studio
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: google-forms-close
-  label: Close
-  partner: close
-  partner_name: Close
-  category: CRM (Customer Relationship Management)
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/close
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-leadconnector
-  label: LeadConnector
-  partner_name: LeadConnector
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/leadconnector
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: google-forms-mailerlite
-  label: MailerLite
-  partner: mailerlite
-  partner_name: MailerLite
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/mailerlite
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-brevo
-  label: Brevo
-  partner: brevo
-  partner_name: Brevo
-  category: Email Newsletters
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/brevo
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: google-forms-microsoft-excel
-  label: Microsoft Excel
-  partner_name: Microsoft Excel
-  category: Microsoft
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/google-forms/integrations/excel
-  source: edge
-  status: pending-partner-spec
   arazzo: null
 - slug: google-forms-maven-central
   label: Maven Central
@@ -491,4 +281,247 @@
     sources: true
     builder: Pipedream repo (component)
   status: not-a-workflow
+  arazzo: null
+- slug: google-forms-google-docs
+  label: Google Docs
+  partner: google-docs
+  partner_name: Google Docs
+  category: Documents
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/google-docs
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-google-sheets
+  label: Google Sheets
+  partner: google-sheets
+  partner_name: Google Sheets
+  category: Google
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/google-sheets
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-hubspot
+  label: HubSpot
+  partner: hubspot
+  partner_name: HubSpot
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/hubspot
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-google-drive
+  label: Google Drive
+  partner: google-drive
+  partner_name: Google Drive
+  category: File Management & Storage
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/google-drive
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-airtable
+  label: Airtable
+  partner: airtable
+  partner_name: Airtable
+  category: Databases
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/airtable
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-monday-com
+  label: monday.com
+  partner: monday-com
+  partner_name: monday.com
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/monday
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-whatsapp-notifications
+  label: WhatsApp Notifications
+  partner_name: WhatsApp Notifications
+  category: Communication
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/whatsapp-notifications
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: google-forms-jira-software-cloud
+  label: Jira Software Cloud
+  partner: jira
+  partner_name: Jira Software Cloud
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/jira-software-cloud
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-microsoft-outlook
+  label: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_name: Microsoft Outlook
+  category: Calendar
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/microsoft-outlook
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-follow-up-boss
+  label: Follow Up Boss
+  partner: follow-up-boss
+  partner_name: Follow Up Boss
+  category: CRM (Customer Relationship Management)
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/follow-up-boss
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-activecampaign
+  label: ActiveCampaign
+  partner: activecampaign
+  partner_name: ActiveCampaign
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/activecampaign
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-google-slides
+  label: Google Slides
+  partner: google-slides
+  partner_name: Google Slides
+  category: Documents
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/google-slides
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-close
+  label: Close
+  partner: close
+  partner_name: Close
+  category: CRM (Customer Relationship Management)
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/close
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-google-ai-studio-gemini
+  label: Google AI Studio (Gemini)
+  partner_name: Google AI Studio (Gemini)
+  category: AI Models
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/google-ai-studio
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: google-forms-leadconnector
+  label: LeadConnector
+  partner_name: LeadConnector
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/leadconnector
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: google-forms-mailerlite
+  label: MailerLite
+  partner: mailerlite
+  partner_name: MailerLite
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/mailerlite
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-brevo
+  label: Brevo
+  partner: brevo
+  partner_name: Brevo
+  category: Email Newsletters
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/brevo
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: google-forms-microsoft-excel
+  label: Microsoft Excel
+  partner_name: Microsoft Excel
+  category: Microsoft
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/excel
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: google-forms-google-chat
+  label: Google Chat
+  partner: google-chat
+  partner_name: Google Chat
+  category: Google
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/google-forms/integrations/google-chat
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
   arazzo: null
