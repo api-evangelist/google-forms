@@ -1,4 +1,4 @@
-# Google Forms (google-forms)
+# Google Forms
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,150 +66,205 @@
 
 The Google Forms API is a RESTful interface that lets you create and modify Google Forms programmatically, read form responses, set up watches for notifications on form changes and new responses, and integrate forms with external applications.
 
-**URL:** [Visit APIs.json URL](https://developers.google.com/forms/api)
+**Areas:** Data Collection · Forms · Google · Google Workspace · Questionnaire · Responses · Surveys
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Google Forms on APIs.io
 
-## Tags:
+Everything profiled for Google Forms is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/google-forms/](https://apis.io/providers/google-forms/)** — or go straight to one of the APIs or properties below.
 
- - Data Collection, Forms, Google, Google Workspace, Questionnaires, Responses, Surveys
+### APIs (3)
 
-## Timestamps
+- [Google Forms API](https://apis.io/apis/google-forms/google-forms-forms-api/) — Operations for creating, reading, and updating forms
+- [Google Forms Responses API](https://apis.io/apis/google-forms/google-forms-responses-api/) — Operations for reading form responses
+- [Google Forms Watches API](https://apis.io/apis/google-forms/google-forms-watches-api/) — Operations for managing form change notifications
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-04-18
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Google Forms API v1
-Create and modify Google Forms, read form responses and structure, set up watches for change notifications, and integrate forms with external applications via Cloud Pub/Sub.
+#### Arazzo workflows (8)
 
-**Human URL:** [https://developers.google.com/forms/api](https://developers.google.com/forms/api)
+Multi-step workflows that chain operations into a business task.
 
-#### Tags:
+- [Google Forms Build and Grade a Quiz](https://apis.io/arazzos/google-forms/google-forms-build-and-grade-quiz-workflow/)
+- [Google Forms Close a Form and Export Final Responses](https://apis.io/arazzos/google-forms/google-forms-close-form-and-export-workflow/)
+- [Google Forms Create and Publish a Form](https://apis.io/arazzos/google-forms/google-forms-create-and-publish-form-workflow/)
+- [Google Forms Harvest Form Responses](https://apis.io/arazzos/google-forms/google-forms-harvest-form-responses-workflow/)
+- [Google Forms Renew an Expiring Watch](https://apis.io/arazzos/google-forms/google-forms-renew-expiring-watch-workflow/)
+- [Google Forms Safe Form Edit with Write Control](https://apis.io/arazzos/google-forms/google-forms-safe-form-edit-workflow/)
+- [Google Forms Subscribe to Response Notifications](https://apis.io/arazzos/google-forms/google-forms-subscribe-response-notifications-workflow/)
+- [Google Forms Unsubscribe Form Watches](https://apis.io/arazzos/google-forms/google-forms-unsubscribe-form-watches-workflow/)
 
- - Forms, Google, Questionnaires, Responses, Surveys, Watches
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://developers.google.com/forms/api/reference/rest)
-- [OpenAPI](openapi/google-forms-api.yaml)
-- [JSONSchema](json-schema/google-forms-api-form-schema.json)
-- [JSONSchema](json-schema/google-forms-api-form-response-schema.json)
-- [JSONSchema](json-schema/google-forms-api-watch-schema.json)
-- [JSONSchema](json-schema/google-forms-api-question-schema.json)
-- [JSONStructure](json-structure/google-forms-api-form-structure.json)
-- [JSONStructure](json-structure/google-forms-api-form-response-structure.json)
-- [JSONStructure](json-structure/google-forms-api-watch-structure.json)
-- [JSONStructure](json-structure/google-forms-api-question-structure.json)
-- [Example](examples/google-forms-api-form-example.json)
-- [Example](examples/google-forms-api-form-response-example.json)
-- [Example](examples/google-forms-api-watch-example.json)
-- [Example](examples/google-forms-api-question-example.json)
-- [APIReference](https://developers.google.com/forms/api/reference/rest)
-- [Quickstart](https://developers.google.com/forms/api/quickstart/python)
-- [Authentication](https://developers.google.com/forms/api/guides/auth)
+- [google-forms](https://apis.io/servers/google-forms/google-forms/)
 
-## Common Properties
+#### Agentic access (1)
 
-- [Console](https://console.cloud.google.com/apis/library/forms.googleapis.com)
-- [GettingStarted](https://developers.google.com/forms/api/guides)
-- [Authentication](https://developers.google.com/identity/protocols/oauth2)
-- [StatusPage](https://status.cloud.google.com/)
-- [PrivacyPolicy](https://policies.google.com/privacy)
-- [TermsOfService](https://policies.google.com/terms)
-- [RateLimits](https://developers.google.com/forms/api/guides/quota)
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Google Forms Agentic Access](https://apis.io/agentic-access/google-forms/google-forms-agentic-access/)
+
+#### JSON Schema (4)
+
+The data models the API reads and writes.
+
+- [Form](https://apis.io/schemas/google-forms/google-forms-api-form/)
+- [FormResponse](https://apis.io/schemas/google-forms/google-forms-api-form-response/)
+- [Question](https://apis.io/schemas/google-forms/google-forms-api-question/)
+- [Watch](https://apis.io/schemas/google-forms/google-forms-api-watch/)
+
+#### JSON Structure (4)
+
+Data models expressed in JSON Structure.
+
+- [Google Forms Api Form Response Structure](https://apis.io/json-structure/google-forms/google-forms-api-form-response-structure/)
+- [Google Forms Api Form Structure](https://apis.io/json-structure/google-forms/google-forms-api-form-structure/)
+- [Google Forms Api Question Structure](https://apis.io/json-structure/google-forms/google-forms-api-question-structure/)
+- [Google Forms Api Watch Structure](https://apis.io/json-structure/google-forms/google-forms-api-watch-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Google Forms Api Context](https://apis.io/jsonld/google-forms/google-forms-api-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Google Forms Vocabulary](https://apis.io/vocabularies/google-forms/google-forms-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Google Forms Api Form Example](https://apis.io/examples/google-forms/google-forms-api-form-example/)
+- [Google Forms Api Form Response Example](https://apis.io/examples/google-forms/google-forms-api-form-response-example/)
+- [Google Forms Api Question Example](https://apis.io/examples/google-forms/google-forms-api-question-example/)
+- [Google Forms Api Watch Example](https://apis.io/examples/google-forms/google-forms-api-watch-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Google Forms API](https://apis.io/collections/google-forms/open-google-forms-forms-api/)
+- [Google Forms Responses API](https://apis.io/collections/google-forms/open-google-forms-responses-api/)
+- [Google Forms Watches API](https://apis.io/collections/google-forms/open-google-forms-watches-api/)
+- [Google Forms API](https://apis.io/collections/google-forms/postman-google-forms-forms-api/)
+- [Google Forms Responses API](https://apis.io/collections/google-forms/postman-google-forms-responses-api/)
+- [Google Forms Watches API](https://apis.io/collections/google-forms/postman-google-forms-watches-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Google Forms Api Overlay](https://apis.io/overlays/google-forms/google-forms-api-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Google Forms — jsonschema rules](https://apis.io/rules/google-forms/google-forms-jsonschema-spectral-rules/)
+- [Google Forms API Rules](https://apis.io/rules/google-forms/google-forms-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Google Forms Authentication](https://apis.io/security/google-forms/google-forms-authentication/)
+- [Google Forms Domain Security](https://apis.io/security/google-forms/google-forms-domain-security/)
+- [Google Forms Vulnerability Disclosure](https://apis.io/security/google-forms/google-forms-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Google Forms Scopes](https://apis.io/scopes/google-forms/google-forms-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Google Forms Plans Pricing](https://apis.io/plans/google-forms/google-forms-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Google Forms Rate Limits](https://apis.io/rate-limits/google-forms/google-forms-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Google Forms Finops](https://apis.io/finops/google-forms/google-forms-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.google.com/)
+- [Getting started](https://developers.google.com/forms/api/guides)
 - [Support](https://developers.google.com/forms/api/support)
+- [Terms of service](https://policies.google.com/terms)
+- [Privacy policy](https://policies.google.com/privacy)
+- [GitHub](https://github.com/googleworkspace)
+- [Status](https://status.cloud.google.com/)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Form Creation | Programmatically create Google Forms with custom titles and descriptions. |
-| Batch Updates | Apply multiple changes to a form in a single API call. |
-| Response Collection | Read and analyze form responses programmatically. |
-| Watch Notifications | Receive real-time notifications via Cloud Pub/Sub when forms change or responses are submitted. |
-| Quiz Support | Create and grade quiz forms with correct answers and scoring. |
-| Publish Settings | Control whether forms are published and accepting responses. |
-| File Upload Questions | Support for file upload question types. |
-| Rating Questions | Support for rating-style questions with customizable icons. |
+**Kin Score 45.9** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 85.7 |
+| Contract quality | 31.3 |
+| Contract governance | 31.8 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 50.0 |
+| Access clarity | 28.9 |
 
-| Name | Description |
-|------|-------------|
-| Automated Survey Distribution | Create and distribute surveys programmatically as part of CRM or marketing workflows. |
-| Response Analytics | Automatically collect and analyze form responses for reporting dashboards. |
-| Event-Driven Processing | Trigger downstream workflows when new responses are submitted using watches. |
-| Quiz and Assessment Automation | Build automated grading systems for educational quizzes. |
-| Data Collection Pipelines | Integrate forms into data collection pipelines for research or operations. |
+**Agent readiness 35.2** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
 
-| Name | Description |
-|------|-------------|
-| Google Sheets | Automatically link form responses to Google Sheets for analysis. |
-| Google Cloud Pub/Sub | Receive real-time notifications about form events via Pub/Sub topics. |
-| Google Drive | Store file upload responses in Google Drive. |
-| Google Workspace | Integrate with other Google Workspace apps for collaboration. |
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/google-forms/](https://apis.io/providers/google-forms/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Google Forms API](openapi/google-forms-api.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Google Forms: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [Form](json-schema/google-forms-api-form-schema.json)
-- [FormResponse](json-schema/google-forms-api-form-response-schema.json)
-- [Watch](json-schema/google-forms-api-watch-schema.json)
-- [Question](json-schema/google-forms-api-question-schema.json)
-
-### JSON Structure
-
-- [Form](json-structure/google-forms-api-form-structure.json)
-- [FormResponse](json-structure/google-forms-api-form-response-structure.json)
-- [Watch](json-structure/google-forms-api-watch-structure.json)
-- [Question](json-structure/google-forms-api-question-structure.json)
-
-### JSON-LD
-
-- [Google Forms API Context](json-ld/google-forms-api-context.jsonld)
-
-### Examples
-
-- [Form](examples/google-forms-api-form-example.json)
-- [FormResponse](examples/google-forms-api-form-response-example.json)
-- [Watch](examples/google-forms-api-watch-example.json)
-- [Question](examples/google-forms-api-question-example.json)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Google Forms API](capabilities/shared/forms-api.yaml) — 11 operations for form, response, and watch management
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Form Management](capabilities/form-management.yaml) | Google Forms API | 10 | Form Administrator, Data Analyst |
-
-## Vocabulary
-
-- [Google Forms Vocabulary](vocabulary/google-forms-vocabulary.yaml) — Unified taxonomy mapping 3 resources, 7 actions, 1 workflow, and 2 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Google Forms Spectral Rules](rules/google-forms-spectral-rules.yml) — 24 rules across 8 categories enforcing Google Forms API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/google-forms/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
